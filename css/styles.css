@@ -179,3 +179,184 @@ footer {
         padding-top: 66px;
     }
 }
+
+/* ===== СТИЛИ ДЛЯ ЗАКЛАДОК (TABS) ===== */
+
+/* Навигация в виде закладок */
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+    margin-bottom: 20px;
+}
+
+.nav-tabs .nav-link {
+    color: var(--dark-color);
+    border: 1px solid transparent;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 10px 20px;
+    margin-bottom: -2px;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: #e9ecef #e9ecef #dee2e6;
+    color: var(--primary-color);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--primary-color);
+    background-color: white;
+    border-color: #dee2e6 #dee2e6 white;
+    border-bottom: 2px solid white;
+    font-weight: 600;
+}
+
+/* Контент закладок */
+.tab-content {
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    padding: 25px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.tab-pane {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Анимация появления закладок */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Стили для списка-закладок (альтернативный вариант) */
+.list-group-tabs .list-group-item {
+    border: none;
+    border-left: 3px solid transparent;
+    border-radius: 0;
+    padding: 12px 15px;
+    color: var(--dark-color);
+    transition: all 0.3s ease;
+}
+
+.list-group-tabs .list-group-item:hover {
+    background-color: rgba(44, 110, 73, 0.05);
+    border-left-color: var(--light-color);
+}
+
+.list-group-tabs .list-group-item.active {
+    background-color: rgba(44, 110, 73, 0.1);
+    border-left-color: var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.list-group-tabs .list-group-item i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Кнопки навигации между закладками */
+.tab-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.tab-navigation .btn {
+    min-width: 120px;
+}
+
+.tab-indicators {
+    display: flex;
+    gap: 5px;
+}
+
+.tab-indicators .btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Быстрые ссылки для мобильных */
+.quick-links {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.quick-links h6 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 5px;
+}
+
+/* Адаптивность закладок */
+@media (max-width: 768px) {
+    .nav-tabs .nav-link {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+    
+    .tab-content {
+        padding: 15px;
+    }
+    
+    .tab-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .tab-navigation .btn {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .tab-indicators {
+        justify-content: center;
+        order: -1;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .nav-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .nav-tabs .nav-link {
+        min-width: 120px;
+        text-align: center;
+    }
+    
+    .tab-content {
+        padding: 12px;
+    }
+}
