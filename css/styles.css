@@ -123,6 +123,84 @@ footer {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 0.25rem rgba(44, 110, 73, 0.25);
 }
+
+/* Кнопка "Наверх" */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    z-index: 1000;
+}
+
+/* Навигация внутри страницы */
+.page-nav {
+    position: sticky;
+    top: 100px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.page-nav a {
+    color: var(--dark-color);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.page-nav a:hover {
+    color: var(--primary-color);
+}
+
+.internal-nav {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.internal-nav a {
+    color: var(--dark-color);
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.internal-nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Шаги производства */
+.production-step {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-left: 4px solid var(--primary-color);
+    background-color: #f9f9f9;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .page-nav {
+        position: static;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding-top: 66px;
+    }
+}
+
 /* ===== СТИЛИ ДЛЯ ЗАКЛАДОК (TABS) - ОБЪЕДИНЕННЫЕ ===== */
 
 /* Навигация в виде закладок */
