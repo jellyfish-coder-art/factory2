@@ -77,7 +77,6 @@ function initSmoothScrolling() {
         });
     });
 }
-<script>
 document.addEventListener('DOMContentLoaded', function() {
     const currentPage = location.pathname.split('/').pop();
     document.querySelectorAll('.nav-link').forEach(link => {
@@ -86,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-</script>
 
 // Функция отслеживания прокрутки
 function initScrollSpy() {
