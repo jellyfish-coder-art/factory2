@@ -123,85 +123,7 @@ footer {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 0.25rem rgba(44, 110, 73, 0.25);
 }
-
-/* Кнопка "Наверх" */
-.back-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
-    z-index: 1000;
-}
-
-/* Навигация внутри страницы */
-.page-nav {
-    position: sticky;
-    top: 100px;
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.page-nav a {
-    color: var(--dark-color);
-    text-decoration: none;
-    display: block;
-    margin-bottom: 8px;
-}
-
-.page-nav a:hover {
-    color: var(--primary-color);
-}
-
-.internal-nav {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.internal-nav a {
-    color: var(--dark-color);
-    text-decoration: none;
-    display: inline-block;
-    margin-right: 15px;
-}
-
-.internal-nav a:hover {
-    color: var(--primary-color);
-}
-
-/* Шаги производства */
-.production-step {
-    margin-bottom: 30px;
-    padding: 20px;
-    border-left: 4px solid var(--primary-color);
-    background-color: #f9f9f9;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .hero-section {
-        padding: 60px 0;
-    }
-    
-    .display-4 {
-        font-size: 2rem;
-    }
-    
-    .page-nav {
-        position: static;
-    }
-}
-
-@media (max-width: 576px) {
-    body {
-        padding-top: 66px;
-    }
-}
-
-/* ===== СТИЛИ ДЛЯ ЗАКЛАДОК (TABS) ===== */
+/* ===== СТИЛИ ДЛЯ ЗАКЛАДОК (TABS) - ОБЪЕДИНЕННЫЕ ===== */
 
 /* Навигация в виде закладок */
 .nav-tabs {
@@ -240,26 +162,44 @@ footer {
     padding: 25px;
     background-color: white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: relative;
+    min-height: 600px; /* Фиксированная минимальная высота для предотвращения прыжков */
 }
 
+/* Плавное переключение закладок */
 .tab-pane {
-    display: none;
-    animation: fadeIn 0.5s ease;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    padding: 25px;
 }
 
 .tab-pane.active {
-    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    position: relative;
+    visibility: visible;
+    height: auto;
+    overflow: visible;
+    animation: tabSwitch 0.4s ease;
 }
 
-/* Анимация появления закладок */
-@keyframes fadeIn {
-    from {
+/* Анимация переключения закладок */
+@keyframes tabSwitch {
+    0% {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateX(-10px);
     }
-    to {
+    100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
 }
 
@@ -295,12 +235,20 @@ footer {
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
-    padding-top: 20px;
+    padding: 15px;
     border-top: 1px solid #eee;
+    position: sticky;
+    bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 -2px 15px rgba(0,0,0,0.1);
+    z-index: 150;
 }
 
 .tab-navigation .btn {
-    min-width: 120px;
+    min-width: 140px;
+    padding: 10px 20px;
 }
 
 .tab-indicators {
@@ -316,6 +264,17 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.tab-indicators .btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.tab-indicators .btn:not(.active) {
+    background-color: transparent;
+    color: var(--dark-color);
 }
 
 /* Быстрые ссылки для мобильных */
@@ -335,99 +294,12 @@ footer {
     padding-bottom: 5px;
 }
 
-/* Адаптивность закладок */
-@media (max-width: 768px) {
-    .nav-tabs .nav-link {
-        padding: 8px 12px;
-        font-size: 0.9rem;
-        margin-bottom: 5px;
-    }
-    
-    .tab-content {
-        padding: 15px;
-    }
-    
-    .tab-navigation {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .tab-navigation .btn {
-        width: 100%;
-        margin-bottom: 5px;
-    }
-    
-    .tab-indicators {
-        justify-content: center;
-        order: -1;
-        margin-bottom: 15px;
-    }
-}
-
-@media (max-width: 576px) {
-    .nav-tabs {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .nav-tabs .nav-link {
-        min-width: 120px;
-        text-align: center;
-    }
-    
-    .tab-content {
-        padding: 12px;
-    }
-}
-
-/* ===== ИСПРАВЛЕНИЯ ДЛЯ ЗАКЛАДОК И НАВИГАЦИИ ===== */
-
-/* Фиксируем боковую навигацию */
-.page-nav.card {
+.quick-links.fixed-top-mobile {
     position: sticky;
-    top: 90px; /* Ниже основного навбара */
-    z-index: 100;
-    max-height: calc(100vh - 120px);
-    overflow-y: auto;
-}
-
-/* Карточка с графической ссылкой - также sticky, но ниже */
-.page-nav.card + .card {
-    position: sticky;
-    top: 350px; /* Ниже основной навигации */
-    z-index: 99;
-    margin-top: 20px;
-}
-
-/* Фикс для контейнера закладок - предотвращаем прыжки */
-#aboutTabsContent {
-    position: relative;
-    min-height: 600px; /* Фиксированная минимальная высота */
-}
-
-/* Плавное переключение закладок без изменения высоты */
-.tab-pane {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
-}
-
-.tab-pane.active {
-    opacity: 1;
-    transform: translateY(0);
-    position: relative;
-    visibility: visible;
-    height: auto;
-    overflow: visible;
+    top: 76px;
+    z-index: 200;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 /* Графические ссылки */
@@ -451,43 +323,21 @@ footer {
     transform: scale(1.05);
 }
 
-/* Быстрые ссылки для мобильных - фиксируем вверху */
-.quick-links.fixed-top-mobile {
+/* Фиксируем боковую навигацию */
+.page-nav.card {
     position: sticky;
-    top: 76px;
-    z-index: 200;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    top: 90px; /* Ниже основного навбара */
+    z-index: 100;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
 }
 
-/* Кнопки навигации между закладками - улучшенный стиль */
-.tab-navigation {
+/* Карточка с графической ссылкой - также sticky, но ниже */
+.page-nav.card + .card {
     position: sticky;
-    bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 -2px 15px rgba(0,0,0,0.1);
-    z-index: 150;
-    margin-top: 40px;
-}
-
-.tab-navigation .btn {
-    min-width: 140px;
-    padding: 10px 20px;
-}
-
-/* Индикаторы закладок */
-.tab-indicators .btn.active {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
-
-.tab-indicators .btn:not(.active) {
-    background-color: transparent;
-    color: var(--dark-color);
+    top: 350px; /* Ниже основной навигации */
+    z-index: 99;
+    margin-top: 20px;
 }
 
 /* Стили для активных элементов навигации */
@@ -496,6 +346,15 @@ footer {
     border-left: 3px solid var(--primary-color) !important;
     color: var(--primary-color) !important;
     font-weight: 600;
+}
+
+/* Улучшенные стили для production-step в закладках */
+.tab-pane .production-step {
+    border-left: 4px solid var(--primary-color);
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 0;
 }
 
 /* Убедимся, что контент не скрывается */
@@ -528,13 +387,19 @@ footer {
         margin-top: 30px;
     }
     
-    #aboutTabsContent {
+    .tab-content {
         min-height: auto;
+        padding: 15px;
     }
 }
 
-/* Дополнительные медиазапросы для очень маленьких экранов */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+    .nav-tabs .nav-link {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+    
     .tab-navigation {
         flex-direction: column;
         gap: 10px;
@@ -548,45 +413,27 @@ footer {
     }
     
     .tab-indicators {
+        justify-content: center;
         order: -1;
         margin-bottom: 15px;
     }
 }
 
-/* Фикс для отступов на главной странице */
-.hero-section .btn-outline-light {
-    border: 2px solid white;
-    color: white;
-    transition: all 0.3s ease;
-}
-
-.hero-section .btn-outline-light:hover {
-    background-color: white;
-    color: var(--primary-color);
-    border-color: white;
-}
-
-/* Улучшенные стили для production-step в закладках */
-.tab-pane .production-step {
-    border-left: 4px solid var(--primary-color);
-    background-color: #f9f9f9;
-    padding: 25px;
-    border-radius: 8px;
-    margin-bottom: 0;
-}
-
-/* Анимация переключения закладок */
-@keyframes tabSwitch {
-    0% {
-        opacity: 0;
-        transform: translateX(-10px);
+@media (max-width: 576px) {
+    .nav-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
     }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
+    
+    .nav-tabs .nav-link {
+        min-width: 120px;
+        text-align: center;
+    }
+    
+    .tab-content {
+        padding: 12px;
     }
 }
 
-.tab-pane.active {
-    animation: tabSwitch 0.4s ease;
-}
