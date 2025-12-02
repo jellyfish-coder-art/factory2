@@ -6,12 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Инициализация динамического расчета
     initOrderCalculator();
+    
+    // Загрузка выбранного продукта из localStorage
+    loadSelectedProduct();
 });
 
 // Функция инициализации формы заказа
 function initOrderForm() {
     const orderForm = document.getElementById('orderForm');
-    const orderSummary = document.getElementById('orderSummary');
+    const orderSummary = document.getElementById('orderSummaryContent');
     
     if (!orderForm) return;
     
@@ -30,6 +33,40 @@ function initOrderForm() {
     
     // Инициализация сводки
     updateOrderSummary();
+}
+
+// Функция загрузки выбранного продукта из каталога
+function loadSelectedProduct() {
+    try {
+        const savedProduct = localStorage.getItem('selectedProduct');
+        if (savedProduct) {
+            const product = JSON.parse(savedProduct);
+            const boxTypeSelect = document.getElementById('boxType');
+            
+            if (boxTypeSelect && product.category) {
+                // Устанавливаем соответствующую категорию
+                boxTypeSelect.value = product.category;
+                
+                // Показываем уведомление
+                const notification = document.createElement('div');
+                notification.className = 'alert alert-info alert-dismissible fade show';
+                notification.innerHTML = `
+                    <i class="bi bi-cart-check me-2"></i>
+                    <strong>Товар добавлен из каталога:</strong> ${product.name}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                document.querySelector('.card-body').prepend(notification);
+                
+                // Очищаем localStorage
+                localStorage.removeItem('selectedProduct');
+                
+                // Обновляем сводку
+                setTimeout(updateOrderSummary, 100);
+            }
+        }
+    } catch (error) {
+        console.error('Ошибка загрузки продукта:', error);
+    }
 }
 
 // Функция валидации формы
@@ -62,10 +99,17 @@ function validateForm() {
         isValid = false;
     }
     
-    // Проверка количества
+    // Проверка количества (минимум 100)
     const quantityField = document.getElementById('quantity');
-    if (quantityField.value && quantityField.value < 100) {
+    if (quantityField.value && parseInt(quantityField.value) < 100) {
         markFieldAsInvalid(quantityField);
+        isValid = false;
+    }
+    
+    // Проверка типа коробки
+    const boxTypeField = document.getElementById('boxType');
+    if (boxTypeField && !boxTypeField.value) {
+        markFieldAsInvalid(boxTypeField);
         isValid = false;
     }
     
@@ -80,86 +124,141 @@ function isValidEmail(email) {
 
 // Функция проверки телефона
 function isValidPhone(phone) {
-    const phoneRegex = /^[\+]?[0-9\s\-\(\)]+$/;
-    return phoneRegex.test(phone);
+    // Разрешаем +7, 8, или просто цифры с возможными пробелами, скобками, дефисами
+    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+    return phoneRegex.test(phone.replace(/\s/g, ''));
 }
 
 // Функция отметки поля как невалидного
 function markFieldAsInvalid(field) {
     field.classList.remove('is-valid');
     field.classList.add('is-invalid');
+    
+    // Добавляем сообщение об ошибке, если его нет
+    if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('invalid-feedback')) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'invalid-feedback';
+        
+        if (field.type === 'number' && field.id === 'quantity') {
+            errorDiv.textContent = 'Минимальный заказ: 100 шт';
+        } else if (field.type === 'email') {
+            errorDiv.textContent = 'Введите корректный email адрес';
+        } else if (field.id === 'phoneNumber') {
+            errorDiv.textContent = 'Введите корректный номер телефона';
+        } else {
+            errorDiv.textContent = 'Это поле обязательно для заполнения';
+        }
+        
+        field.parentNode.appendChild(errorDiv);
+    }
 }
 
 // Функция отметки поля как валидного
 function markFieldAsValid(field) {
     field.classList.remove('is-invalid');
     field.classList.add('is-valid');
+    
+    // Удаляем сообщение об ошибке, если оно есть
+    const errorDiv = field.nextElementSibling;
+    if (errorDiv && errorDiv.classList.contains('invalid-feedback')) {
+        errorDiv.remove();
+    }
 }
 
 // Функция обновления сводки заказа
 function updateOrderSummary() {
-    const orderSummary = document.getElementById('orderSummary');
+    const orderSummary = document.getElementById('orderSummaryContent');
     
     if (!orderSummary) return;
     
     // Получаем значения из формы
-    const productType = document.getElementById('productType').value;
+    const boxType = document.getElementById('boxType').value;
     const quantity = document.getElementById('quantity').value || 0;
-    const urgency = document.querySelector('input[name="urgency"]:checked')?.value;
-    const paymentType = document.querySelector('input[name="paymentType"]:checked')?.value;
+    const deliverySpeed = document.querySelector('input[name="deliverySpeed"]:checked')?.value;
+    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+    const boxSize = document.getElementById('boxSize').value;
     
     // Рассчитываем стоимость
-    const pricePerUnit = getPricePerUnit(productType);
-    const totalPrice = calculateTotalPrice(pricePerUnit, quantity, urgency);
+    const pricePerUnit = getPricePerUnit(boxType);
+    const totalPrice = calculateTotalPrice(pricePerUnit, quantity, deliverySpeed);
     
     // Формируем HTML для сводки
     let summaryHTML = `
-        <h5>Детали заказа:</h5>
+        <h5>Детали вашего заказа:</h5>
         <table class="table table-sm">
     `;
     
-    if (productType) {
-        const productName = getProductName(productType);
+    if (boxType) {
+        const boxName = getBoxName(boxType);
         summaryHTML += `
             <tr>
-                <td>Тип коробки:</td>
-                <td>${productName}</td>
+                <td><i class="bi bi-box me-2"></i>Тип коробки:</td>
+                <td><strong>${boxName}</strong></td>
             </tr>
         `;
     }
     
     summaryHTML += `
             <tr>
-                <td>Количество:</td>
-                <td>${quantity} шт</td>
+                <td><i class="bi bi-123 me-2"></i>Количество:</td>
+                <td><strong>${quantity} шт</strong></td>
             </tr>
     `;
+    
+    if (boxSize) {
+        summaryHTML += `
+            <tr>
+                <td><i class="bi bi-rulers me-2"></i>Размер:</td>
+                <td>${boxSize}</td>
+            </tr>
+        `;
+    }
     
     if (pricePerUnit > 0) {
         summaryHTML += `
             <tr>
-                <td>Цена за шт:</td>
+                <td><i class="bi bi-currency-exchange me-2"></i>Цена за шт:</td>
                 <td>${pricePerUnit} руб.</td>
             </tr>
         `;
     }
     
-    if (urgency) {
-        const urgencyText = urgency === 'express' ? 'Срочная (3-5 дней)' : 'Стандартная (7-10 дней)';
+    if (deliverySpeed) {
+        const deliveryText = deliverySpeed === 'express' ? 
+            '<span class="text-warning">Срочная (3-5 дней) +20%</span>' : 
+            'Стандартная (7-10 дней)';
         summaryHTML += `
             <tr>
-                <td>Срок производства:</td>
-                <td>${urgencyText}</td>
+                <td><i class="bi bi-truck me-2"></i>Срок доставки:</td>
+                <td>${deliveryText}</td>
             </tr>
         `;
     }
     
-    if (paymentType) {
-        const paymentText = paymentType === 'cash' ? 'Наличные' : 'Безналичный расчет';
+    if (paymentMethod) {
+        const paymentText = getPaymentMethodText(paymentMethod);
         summaryHTML += `
             <tr>
-                <td>Оплата:</td>
+                <td><i class="bi bi-credit-card me-2"></i>Способ оплаты:</td>
                 <td>${paymentText}</td>
+            </tr>
+        `;
+    }
+    
+    // Скидки
+    const quantityNum = parseInt(quantity);
+    if (quantityNum >= 1000) {
+        summaryHTML += `
+            <tr class="table-success">
+                <td><i class="bi bi-percent me-2"></i>Скидка:</td>
+                <td><strong>10% за большой объем</strong></td>
+            </tr>
+        `;
+    } else if (quantityNum >= 500) {
+        summaryHTML += `
+            <tr class="table-success">
+                <td><i class="bi bi-percent me-2"></i>Скидка:</td>
+                <td><strong>5% за объем</strong></td>
             </tr>
         `;
     }
@@ -167,7 +266,7 @@ function updateOrderSummary() {
     if (totalPrice > 0) {
         summaryHTML += `
             <tr class="table-primary fw-bold">
-                <td>Итого:</td>
+                <td><i class="bi bi-calculator me-2"></i>Итого:</td>
                 <td>${totalPrice.toLocaleString('ru-RU')} руб.</td>
             </tr>
         `;
@@ -175,13 +274,17 @@ function updateOrderSummary() {
     
     summaryHTML += `
         </table>
+        <div class="alert alert-success">
+            <i class="bi bi-info-circle me-2"></i>
+            При заказе от <strong>5000 коробок</strong> - бесплатная доставка!
+        </div>
     `;
     
     orderSummary.innerHTML = summaryHTML;
 }
 
 // Функция получения цены за единицу
-function getPricePerUnit(productType) {
+function getPricePerUnit(boxType) {
     const prices = {
         'small': 12,
         'medium': 18,
@@ -189,11 +292,11 @@ function getPricePerUnit(productType) {
         'special': 35
     };
     
-    return prices[productType] || 0;
+    return prices[boxType] || 0;
 }
 
-// Функция получения названия продукта
-function getProductName(productType) {
+// Функция получения названия коробки
+function getBoxName(boxType) {
     const names = {
         'small': 'Малая коробка',
         'medium': 'Средняя коробка',
@@ -201,22 +304,36 @@ function getProductName(productType) {
         'special': 'Специальная коробка'
     };
     
-    return names[productType] || 'Не выбрано';
+    return names[boxType] || 'Не выбрано';
+}
+
+// Функция получения текста способа оплаты
+function getPaymentMethodText(paymentMethod) {
+    const methods = {
+        'cash': 'Наличные при получении',
+        'card': 'Безналичный расчет',
+        'online': 'Онлайн оплата картой'
+    };
+    
+    return methods[paymentMethod] || 'Не выбрано';
 }
 
 // Функция расчета общей стоимости
-function calculateTotalPrice(pricePerUnit, quantity, urgency) {
-    let total = pricePerUnit * quantity;
+function calculateTotalPrice(pricePerUnit, quantity, deliverySpeed) {
+    const quantityNum = parseInt(quantity) || 0;
+    let total = pricePerUnit * quantityNum;
+    
+    if (total <= 0) return 0;
     
     // Наценка за срочность
-    if (urgency === 'express') {
+    if (deliverySpeed === 'express') {
         total *= 1.2; // +20% за срочность
     }
     
     // Скидка за объем
-    if (quantity >= 1000) {
+    if (quantityNum >= 1000) {
         total *= 0.9; // -10%
-    } else if (quantity >= 500) {
+    } else if (quantityNum >= 500) {
         total *= 0.95; // -5%
     }
     
@@ -228,11 +345,17 @@ function initOrderCalculator() {
     const quantityInput = document.getElementById('quantity');
     
     if (quantityInput) {
+        // Устанавливаем минимальное значение
+        quantityInput.min = 100;
+        
         quantityInput.addEventListener('input', function() {
-            // Автоматически добавляем значения по умолчанию, если поле пустое
-            if (!this.value && this.hasAttribute('data-default')) {
-                this.value = this.getAttribute('data-default');
+            // Автоматически устанавливаем минимум 100
+            if (this.value && parseInt(this.value) < 100) {
+                this.value = 100;
             }
+            
+            // Обновляем сводку
+            updateOrderSummary();
         });
     }
 }
@@ -251,15 +374,26 @@ function sendOrderData() {
     // Добавляем дополнительную информацию
     orderData.orderDate = new Date().toISOString();
     orderData.orderId = 'ORD-' + Date.now();
+    orderData.orderStatus = 'pending';
     
     // Рассчитываем итоговую стоимость
-    const productType = document.getElementById('productType').value;
+    const boxType = document.getElementById('boxType').value;
     const quantity = document.getElementById('quantity').value || 0;
-    const urgency = document.querySelector('input[name="urgency"]:checked')?.value;
-    const pricePerUnit = getPricePerUnit(productType);
-    orderData.totalPrice = calculateTotalPrice(pricePerUnit, quantity, urgency);
+    const deliverySpeed = document.querySelector('input[name="deliverySpeed"]:checked')?.value;
+    const pricePerUnit = getPricePerUnit(boxType);
+    orderData.totalPrice = calculateTotalPrice(pricePerUnit, quantity, deliverySpeed);
+    orderData.pricePerUnit = pricePerUnit;
+    
+    // Добавляем информацию о продукте
+    orderData.boxName = getBoxName(boxType);
     
     console.log('Данные для отправки:', orderData);
+    
+    // Показываем индикатор загрузки
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Отправка...';
+    submitBtn.disabled = true;
     
     // Отправка данных на удаленный сервер (JSONPlaceholder для примера)
     fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -269,33 +403,91 @@ function sendOrderData() {
         },
         body: JSON.stringify(orderData),
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Ошибка сети');
+        }
+        return response.json();
+    })
     .then(data => {
         console.log('Успешно отправлено:', data);
-        showSuccessMessage();
+        showSuccessMessage(orderData.orderId);
+        
+        // Очищаем форму
         form.reset();
+        
+        // Сбрасываем валидационные стили
+        form.querySelectorAll('.is-valid, .is-invalid').forEach(field => {
+            field.classList.remove('is-valid', 'is-invalid');
+        });
+        
+        // Обновляем сводку
+        updateOrderSummary();
     })
     .catch(error => {
         console.error('Ошибка:', error);
         showErrorMessage();
+    })
+    .finally(() => {
+        // Восстанавливаем кнопку
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
     });
 }
 
 // Функция показа сообщения об успехе
-function showSuccessMessage() {
-    alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
+function showSuccessMessage(orderId) {
+    // Создаем красивый alert
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'alert alert-success alert-dismissible fade show';
+    alertDiv.innerHTML = `
+        <div class="d-flex align-items-center">
+            <i class="bi bi-check-circle-fill me-3 fs-4"></i>
+            <div>
+                <h5 class="alert-heading">Заказ успешно оформлен!</h5>
+                <p class="mb-0">Ваш заказ <strong>${orderId}</strong> принят в обработку.</p>
+                <p class="mb-0">Менеджер свяжется с вами в течение 2 часов для подтверждения.</p>
+                <hr>
+                <p class="mb-0 small">
+                    <i class="bi bi-info-circle me-1"></i>
+                    Копия заказа отправлена на ваш email.
+                </p>
+            </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
     
-    // Или более красивое уведомление:
-    // const alertDiv = document.createElement('div');
-    // alertDiv.className = 'alert alert-success alert-dismissible fade show';
-    // alertDiv.innerHTML = `
-    //     <strong>Успешно!</strong> Ваш заказ отправлен. Номер заказа: ORD-${Date.now()}
-    //     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    // `;
-    // document.querySelector('.container').prepend(alertDiv);
+    // Вставляем alert перед формой
+    const formCard = document.querySelector('.card');
+    formCard.parentNode.insertBefore(alertDiv, formCard);
+    
+    // Автоматически скрываем через 10 секунд
+    setTimeout(() => {
+        if (alertDiv.parentNode) {
+            const bsAlert = new bootstrap.Alert(alertDiv);
+            bsAlert.close();
+        }
+    }, 10000);
 }
 
 // Функция показа сообщения об ошибке
 function showErrorMessage() {
-    alert('Произошла ошибка при отправке заказа. Пожалуйста, попробуйте еще раз или свяжитесь с нами по телефону.');
+    // Создаем alert с ошибкой
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'alert alert-danger alert-dismissible fade show';
+    alertDiv.innerHTML = `
+        <div class="d-flex align-items-center">
+            <i class="bi bi-exclamation-triangle-fill me-3 fs-4"></i>
+            <div>
+                <h5 class="alert-heading">Ошибка отправки заказа</h5>
+                <p class="mb-0">Произошла ошибка при отправке заказа. Пожалуйста, попробуйте еще раз.</p>
+                <p class="mb-0">Или свяжитесь с нами по телефону: <strong>+7 (495) 123-45-67</strong></p>
+            </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    // Вставляем alert перед формой
+    const formCard = document.querySelector('.card');
+    formCard.parentNode.insertBefore(alertDiv, formCard);
 }
