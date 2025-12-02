@@ -36,6 +36,27 @@ body {
     margin-bottom: 50px;
 }
 
+/* Стили для кнопок в герое */
+.hero-section .btn {
+    padding: 12px 30px;
+    font-weight: 600;
+    border-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.hero-section .btn-outline-light {
+    background-color: transparent;
+    border-color: white;
+    color: white;
+}
+
+.hero-section .btn-outline-light:hover {
+    background-color: white;
+    color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
 .section-title {
     color: var(--primary-color);
     border-bottom: 2px solid var(--light-color);
@@ -359,4 +380,213 @@ footer {
     .tab-content {
         padding: 12px;
     }
+}
+
+/* ===== ИСПРАВЛЕНИЯ ДЛЯ ЗАКЛАДОК И НАВИГАЦИИ ===== */
+
+/* Фиксируем боковую навигацию */
+.page-nav.card {
+    position: sticky;
+    top: 90px; /* Ниже основного навбара */
+    z-index: 100;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+/* Карточка с графической ссылкой - также sticky, но ниже */
+.page-nav.card + .card {
+    position: sticky;
+    top: 350px; /* Ниже основной навигации */
+    z-index: 99;
+    margin-top: 20px;
+}
+
+/* Фикс для контейнера закладок - предотвращаем прыжки */
+#aboutTabsContent {
+    position: relative;
+    min-height: 600px; /* Фиксированная минимальная высота */
+}
+
+/* Плавное переключение закладок без изменения высоты */
+.tab-pane {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+}
+
+.tab-pane.active {
+    opacity: 1;
+    transform: translateY(0);
+    position: relative;
+    visibility: visible;
+    height: auto;
+    overflow: visible;
+}
+
+/* Графические ссылки */
+.graphic-link {
+    display: block;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.graphic-link:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+.graphic-link img {
+    transition: transform 0.3s ease;
+}
+
+.graphic-link:hover img {
+    transform: scale(1.05);
+}
+
+/* Быстрые ссылки для мобильных - фиксируем вверху */
+.quick-links.fixed-top-mobile {
+    position: sticky;
+    top: 76px;
+    z-index: 200;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Кнопки навигации между закладками - улучшенный стиль */
+.tab-navigation {
+    position: sticky;
+    bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 -2px 15px rgba(0,0,0,0.1);
+    z-index: 150;
+    margin-top: 40px;
+}
+
+.tab-navigation .btn {
+    min-width: 140px;
+    padding: 10px 20px;
+}
+
+/* Индикаторы закладок */
+.tab-indicators .btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.tab-indicators .btn:not(.active) {
+    background-color: transparent;
+    color: var(--dark-color);
+}
+
+/* Стили для активных элементов навигации */
+.list-group-item.active {
+    background-color: rgba(44, 110, 73, 0.1) !important;
+    border-left: 3px solid var(--primary-color) !important;
+    color: var(--primary-color) !important;
+    font-weight: 600;
+}
+
+/* Убедимся, что контент не скрывается */
+@media (min-width: 992px) {
+    .col-lg-9 {
+        padding-left: 30px;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .page-nav.card {
+        position: static;
+        max-height: none;
+        margin-bottom: 20px;
+    }
+    
+    .page-nav.card + .card {
+        position: static;
+        margin-top: 20px;
+    }
+    
+    .quick-links.fixed-top-mobile {
+        position: static;
+        margin-bottom: 20px;
+    }
+    
+    .tab-navigation {
+        position: static;
+        margin-top: 30px;
+    }
+    
+    #aboutTabsContent {
+        min-height: auto;
+    }
+}
+
+/* Дополнительные медиазапросы для очень маленьких экранов */
+@media (max-width: 480px) {
+    .tab-navigation {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .tab-navigation .btn {
+        width: 100%;
+        max-width: 280px;
+        margin-bottom: 5px;
+    }
+    
+    .tab-indicators {
+        order: -1;
+        margin-bottom: 15px;
+    }
+}
+
+/* Фикс для отступов на главной странице */
+.hero-section .btn-outline-light {
+    border: 2px solid white;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.hero-section .btn-outline-light:hover {
+    background-color: white;
+    color: var(--primary-color);
+    border-color: white;
+}
+
+/* Улучшенные стили для production-step в закладках */
+.tab-pane .production-step {
+    border-left: 4px solid var(--primary-color);
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 0;
+}
+
+/* Анимация переключения закладок */
+@keyframes tabSwitch {
+    0% {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.tab-pane.active {
+    animation: tabSwitch 0.4s ease;
 }
