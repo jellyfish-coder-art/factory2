@@ -31,7 +31,7 @@
                         <a class="nav-link" href="about.html">О заводе</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="products.html">Продукция</a>
+                        <a class="nav-link" href="products.html">Продукция</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="order.html">Заказать</a>
@@ -43,48 +43,97 @@
 
     <!-- Страница с продукцией -->
     <div class="container mt-5">
-        <h1 class="text-center mb-5">Наша продукция</h1>
+        <h1 class="text-center mb-5" id="top">Наша продукция</h1>
         
-        <!-- Фильтры -->
+        <!-- Внутренняя навигация -->
         <div class="row mb-4">
-            <div class="col-md-6">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="searchInput" placeholder="Поиск продукции...">
-                    <button class="btn btn-outline-primary" type="button" id="searchButton">
-                        <i class="bi bi-search"></i>
-                    </button>
+            <div class="col-lg-3">
+                <div class="page-nav card p-3 mb-4">
+                    <h5 class="card-title">Навигация по странице</h5>
+                    <div class="list-group list-group-flush">
+                        <a href="#small-boxes" class="list-group-item list-group-item-action">Малые коробки</a>
+                        <a href="#medium-boxes" class="list-group-item list-group-item-action">Средние коробки</a>
+                        <a href="#large-boxes" class="list-group-item list-group-item-action">Крупные коробки</a>
+                        <a href="#special-boxes" class="list-group-item list-group-item-action">Специальные коробки</a>
+                        <a href="#top" class="list-group-item list-group-item-action">К началу страницы</a>
+                    </div>
+                </div>
+                
+                <!-- Мобильная навигация -->
+                <div class="internal-nav d-lg-none mb-4">
+                    <div class="btn-group" role="group">
+                        <a href="#small-boxes" class="btn btn-outline-primary btn-sm">Малые</a>
+                        <a href="#medium-boxes" class="btn btn-outline-primary btn-sm">Средние</a>
+                        <a href="#large-boxes" class="btn btn-outline-primary btn-sm">Крупные</a>
+                        <a href="#special-boxes" class="btn btn-outline-primary btn-sm">Спец.</a>
+                        <a href="#top" class="btn btn-outline-primary btn-sm">Вверх</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <select class="form-select" id="categoryFilter">
-                    <option value="all">Все категории</option>
-                    <option value="small">Малые коробки</option>
-                    <option value="medium">Средние коробки</option>
-                    <option value="large">Крупные коробки</option>
-                    <option value="special">Специальные коробки</option>
-                </select>
+            
+            <div class="col-lg-9">
+                <!-- Фильтры -->
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Поиск продукции...">
+                            <button class="btn btn-outline-primary" type="button" id="searchButton">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <select class="form-select" id="categoryFilter">
+                            <option value="all">Все категории</option>
+                            <option value="small">Малые коробки</option>
+                            <option value="medium">Средние коробки</option>
+                            <option value="large">Крупные коробки</option>
+                            <option value="special">Специальные коробки</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Продукция (6-12 повторяющихся блоков) -->
+                <div class="products-grid" id="productsContainer">
+                    <!-- Секция: Малые коробки -->
+                    <h3 id="small-boxes" class="mt-4 mb-3 section-title">Малые коробки</h3>
+                    <div class="row mb-5" id="smallBoxesContainer">
+                        <!-- Продукты будут загружены через JavaScript -->
+                    </div>
+                    
+                    <!-- Секция: Средние коробки -->
+                    <h3 id="medium-boxes" class="mt-4 mb-3 section-title">Средние коробки</h3>
+                    <div class="row mb-5" id="mediumBoxesContainer">
+                        <!-- Продукты будут загружены через JavaScript -->
+                    </div>
+                    
+                    <!-- Секция: Крупные коробки -->
+                    <h3 id="large-boxes" class="mt-4 mb-3 section-title">Крупные коробки</h3>
+                    <div class="row mb-5" id="largeBoxesContainer">
+                        <!-- Продукты будут загружены через JavaScript -->
+                    </div>
+                    
+                    <!-- Секция: Специальные коробки -->
+                    <h3 id="special-boxes" class="mt-4 mb-3 section-title">Специальные коробки</h3>
+                    <div class="row mb-5" id="specialBoxesContainer">
+                        <!-- Продукты будут загружены через JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Пагинация - 3 варианта на выбор -->
+                <!-- Вариант 1: Простая навигация по секциям (рекомендуется) -->
+                <div class="text-center mt-4">
+                    <div class="btn-group" role="group">
+                        <a href="#small-boxes" class="btn btn-outline-primary">Малые коробки</a>
+                        <a href="#medium-boxes" class="btn btn-outline-primary">Средние коробки</a>
+                        <a href="#large-boxes" class="btn btn-outline-primary">Крупные коробки</a>
+                        <a href="#special-boxes" class="btn btn-outline-primary">Специальные коробки</a>
+                        <a href="#top" class="btn btn-outline-primary">Наверх</a>
+                    </div>
+                </div>
+                
             </div>
         </div>
-        
-        <!-- Продукция (6-12 повторяющихся блоков) -->
-        <div class="row" id="productsContainer">
-            <!-- Продукты будут загружены через JavaScript -->
-        </div>
-        
-        <!-- Пагинация -->
-        <nav aria-label="Навигация по страницам" class="mt-5">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Предыдущая</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Следующая</a>
-                </li>
-            </ul>
-        </nav>
     </div>
 
     <!-- Футер -->
