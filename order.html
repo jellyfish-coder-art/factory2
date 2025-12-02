@@ -34,7 +34,7 @@
                         <a class="nav-link" href="products.html">Продукция</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="order.html">Заказать</a>
+                        <a class="nav-link" href="order.html">Заказать</a>
                     </li>
                 </ul>
             </div>
@@ -43,17 +43,57 @@
 
     <!-- Страница заказа -->
     <div class="container mt-5">
-        <h1 class="text-center mb-5">Оформление заказа</h1>
+        <h1 class="text-center mb-5" id="top">Оформление заказа</h1>
         
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-3">
+                <!-- Внутренняя навигация -->
+                <div class="page-nav card p-3 mb-4">
+                    <h5 class="card-title">Навигация по форме</h5>
+                    <div class="list-group list-group-flush">
+                        <a href="#personal-data" class="list-group-item list-group-item-action">Личные данные</a>
+                        <a href="#order-details" class="list-group-item list-group-item-action">Детали заказа</a>
+                        <a href="#delivery-payment" class="list-group-item list-group-item-action">Доставка и оплата</a>
+                        <a href="#order-summary" class="list-group-item list-group-item-action">Сводка заказа</a>
+                        <a href="#top" class="list-group-item list-group-item-action">К началу страницы</a>
+                    </div>
+                </div>
+                
+                <!-- Мобильная навигация -->
+                <div class="internal-nav d-lg-none mb-4">
+                    <div class="btn-group" role="group">
+                        <a href="#personal-data" class="btn btn-outline-primary btn-sm">Данные</a>
+                        <a href="#order-details" class="btn btn-outline-primary btn-sm">Заказ</a>
+                        <a href="#delivery-payment" class="btn btn-outline-primary btn-sm">Оплата</a>
+                        <a href="#order-summary" class="btn btn-outline-primary btn-sm">Сводка</a>
+                        <a href="#top" class="btn btn-outline-primary btn-sm">Вверх</a>
+                    </div>
+                </div>
+                
+                <!-- Графическая гиперссылка -->
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <p class="card-text">Посмотрите нашу продукцию</p>
+                        <a href="products.html" class="graphic-link">
+                            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+                                 class="img-fluid rounded" 
+                                 alt="Наша продукция">
+                        </a>
+                        <p class="small text-muted mt-2">Кликните на изображение для перехода в каталог</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-9">
                 <div class="card mb-4">
                     <div class="card-header">
                         <h4>Форма заказа</h4>
                     </div>
                     <div class="card-body">
                         <form id="orderForm" action="https://jsonplaceholder.typicode.com/posts" method="POST">
-                            <!-- Личные данные -->
+                            <!-- Раздел 1: Личные данные -->
+                            <h5 id="personal-data" class="mb-3 section-title">Личные данные</h5>
+                            
                             <div class="mb-3">
                                 <label for="customerName" class="form-label">Ваше имя *</label>
                                 <input type="text" class="form-control" id="customerName" name="customerName" required>
@@ -66,7 +106,7 @@
                             
                             <div class="mb-3">
                                 <label for="phoneNumber" class="form-label">Телефон *</label>
-                                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
+                                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required>
                             </div>
                             
                             <div class="mb-3">
@@ -74,10 +114,12 @@
                                 <textarea class="form-control" id="deliveryAddress" name="deliveryAddress" rows="2" required></textarea>
                             </div>
                             
-                            <!-- Детали заказа -->
+                            <!-- Раздел 2: Детали заказа -->
+                            <h5 id="order-details" class="mb-3 mt-4 section-title">Детали заказа</h5>
+                            
                             <div class="mb-3">
-                                <label for="productType" class="form-label">Тип коробки *</label>
-                                <select class="form-select" id="productType" name="productType" required>
+                                <label for="boxType" class="form-label">Тип коробки *</label>
+                                <select class="form-select" id="boxType" name="boxType" required>
                                     <option value="">Выберите тип коробки</option>
                                     <option value="small">Малая коробка</option>
                                     <option value="medium">Средняя коробка</option>
@@ -88,78 +130,130 @@
                             
                             <div class="mb-3">
                                 <label for="quantity" class="form-label">Количество *</label>
-                                <input type="number" class="form-control" id="quantity" name="quantity" min="1" max="10000" value="100" required>
+                                <input type="number" class="form-control" id="quantity" name="quantity" min="100" max="10000" value="100" required>
                                 <div class="form-text">Минимальный заказ: 100 шт</div>
                             </div>
                             
                             <div class="mb-3">
-                                <label for="urgency" class="form-label">Срочность заказа *</label>
+                                <label for="boxSize" class="form-label">Размер коробки (необязательно)</label>
+                                <input type="text" class="form-control" id="boxSize" name="boxSize" placeholder="Например: 30x20x15 см">
+                            </div>
+                            
+                            <!-- Раздел 3: Доставка и оплата -->
+                            <h5 id="delivery-payment" class="mb-3 mt-4 section-title">Доставка и оплата</h5>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Срочность заказа *</label>
                                 <div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="urgency" id="urgencyNormal" value="normal" checked>
-                                        <label class="form-check-label" for="urgencyNormal">Стандартная (7-10 дней)</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="deliverySpeed" id="deliveryNormal" value="normal" checked>
+                                        <label class="form-check-label" for="deliveryNormal">
+                                            Стандартная доставка (7-10 дней)
+                                        </label>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="urgency" id="urgencyExpress" value="express">
-                                        <label class="form-check-label" for="urgencyExpress">Срочная (3-5 дней)</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="deliverySpeed" id="deliveryExpress" value="express">
+                                        <label class="form-check-label" for="deliveryExpress">
+                                            Срочная доставка (3-5 дней) + 15%
+                                        </label>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="mb-3">
-                                <label for="paymentType" class="form-label">Тип оплаты *</label>
+                                <label class="form-label">Способ оплаты *</label>
                                 <div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="paymentType" id="paymentCash" value="cash" checked>
-                                        <label class="form-check-label" for="paymentCash">Наличные при получении</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCash" value="cash" checked>
+                                        <label class="form-check-label" for="paymentCash">
+                                            Наличные при получении
+                                        </label>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="paymentType" id="paymentCard" value="card">
-                                        <label class="form-check-label" for="paymentCard">Безналичный расчет</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCard" value="card">
+                                        <label class="form-check-label" for="paymentCard">
+                                            Безналичный расчет (по счету)
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentOnline" value="online">
+                                        <label class="form-check-label" for="paymentOnline">
+                                            Онлайн оплата картой
+                                        </label>
                                     </div>
                                 </div>
                             </div>
                             
+                            <!-- Раздел 4: Дополнительно -->
+                            <h5 class="mb-3 mt-4">Дополнительная информация</h5>
+                            
                             <div class="mb-3">
-                                <label for="comments" class="form-label">Комментарии к заказу</label>
-                                <textarea class="form-control" id="comments" name="comments" rows="3"></textarea>
+                                <label for="orderComments" class="form-label">Комментарии к заказу</label>
+                                <textarea class="form-control" id="orderComments" name="orderComments" rows="3" placeholder="Укажите особые требования к коробкам, цвету печати и т.д."></textarea>
                             </div>
                             
-                            <div class="form-check mb-4">
+                            <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" id="agreeTerms" name="agreeTerms" required>
                                 <label class="form-check-label" for="agreeTerms">
-                                    Я согласен с условиями обработки персональных данных
+                                    Я согласен с условиями обработки персональных данных и политикой конфиденциальности
                                 </label>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary btn-lg w-100">Отправить заказ</button>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="subscribeNews" name="subscribeNews">
+                                <label class="form-check-label" for="subscribeNews">
+                                    Подписаться на новости и специальные предложения
+                                </label>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">Отправить заказ</button>
+                                <button type="reset" class="btn btn-outline-secondary">Очистить форму</button>
+                            </div>
                         </form>
                     </div>
                 </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="card">
+                
+                <!-- Сводка заказа -->
+                <div class="card" id="order-summary">
                     <div class="card-header">
                         <h4>Информация о заказе</h4>
                     </div>
                     <div class="card-body">
-                        <div id="orderSummary">
+                        <div id="orderSummaryContent">
                             <p>После заполнения формы здесь будет отображаться информация о вашем заказе.</p>
+                            <p>Вы можете <a href="products.html">выбрать коробку из каталога</a> или указать свои параметры в форме.</p>
                         </div>
                         
                         <hr>
                         
-                        <h5>Контакты для связи:</h5>
-                        <p><i class="bi bi-telephone"></i> +7 (495) 123-45-67</p>
-                        <p><i class="bi bi-envelope"></i> orders@kartonpro.ru</p>
-                        <p><i class="bi bi-clock"></i> Пн-Пт: 9:00-18:00</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Контакты для связи:</h5>
+                                <p><i class="bi bi-telephone"></i> +7 (495) 123-45-67</p>
+                                <p><i class="bi bi-envelope"></i> orders@kartonpro.ru</p>
+                                <p><i class="bi bi-clock"></i> Пн-Пт: 9:00-18:00</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Графическая ссылка:</h5>
+                                <a href="about.html" class="graphic-link">
+                                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" 
+                                         class="img-fluid rounded" 
+                                         alt="О нашем заводе">
+                                    <p class="small mt-2">Наш производственный цех</p>
+                                </a>
+                            </div>
+                        </div>
                         
                         <div class="alert alert-info mt-3">
                             <i class="bi bi-info-circle"></i>
-                            <strong>Минимальный заказ:</strong> 100 коробок
-                            <br>
-                            <strong>Срок производства:</strong> от 3 до 10 дней
+                            <div>
+                                <strong>Минимальный заказ:</strong> 100 коробок
+                                <br>
+                                <strong>Срок производства:</strong> от 3 до 10 дней
+                                <br>
+                                <strong>Бесплатная доставка:</strong> при заказе от 5000 коробок
+                            </div>
                         </div>
                     </div>
                 </div>
