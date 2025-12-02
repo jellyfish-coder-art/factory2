@@ -1,8 +1,8 @@
 // js/products.js
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Инициализация продукции
-    initProducts();
+    // Инициализация продукции по категориям
+    initProductsByCategory();
     
     // Настройка фильтров
     initFilters();
@@ -108,19 +108,40 @@ const productsData = [
     }
 ];
 
-// Функция инициализации продукции
-function initProducts() {
-    const container = document.getElementById('productsContainer');
+// Функция инициализации продукции по категориям
+function initProductsByCategory() {
+    // Контейнеры для каждой категории
+    const containers = {
+        'small': document.getElementById('smallBoxesContainer'),
+        'medium': document.getElementById('mediumBoxesContainer'),
+        'large': document.getElementById('largeBoxesContainer'),
+        'special': document.getElementById('specialBoxesContainer')
+    };
     
-    if (!container) return;
+    // Очищаем все контейнеры
+    Object.values(containers).forEach(container => {
+        if (container) container.innerHTML = '';
+    });
     
-    // Очищаем контейнер
-    container.innerHTML = '';
-    
-    // Создаем карточки для каждого продукта
+    // Распределяем продукты по категориям
     productsData.forEach(product => {
-        const productCard = createProductCard(product);
-        container.appendChild(productCard);
+        const container = containers[product.category];
+        if (container) {
+            const productCard = createProductCard(product);
+            container.appendChild(productCard);
+        }
+    });
+    
+    // Скрываем пустые секции
+    Object.entries(containers).forEach(([category, container]) => {
+        if (container && container.children.length === 0) {
+            // Находим заголовок секции и скрываем его
+            const sectionHeader = document.querySelector(`#${category}-boxes`);
+            if (sectionHeader) {
+                sectionHeader.style.display = 'none';
+            }
+            container.style.display = 'none';
+        }
     });
 }
 
@@ -192,36 +213,71 @@ function initFilters() {
 // Функция фильтрации продуктов
 function filterProducts() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const category = document.getElementById('categoryFilter').value;
-    const container = document.getElementById('productsContainer');
+    const selectedCategory = document.getElementById('categoryFilter').value;
     
-    if (!container) return;
+    // Контейнеры для каждой категории
+    const containers = {
+        'small': document.getElementById('smallBoxesContainer'),
+        'medium': document.getElementById('mediumBoxesContainer'),
+        'large': document.getElementById('largeBoxesContainer'),
+        'special': document.getElementById('specialBoxesContainer')
+    };
     
-    // Очищаем контейнер
-    container.innerHTML = '';
+    // Очищаем все контейнеры
+    Object.values(containers).forEach(container => {
+        if (container) container.innerHTML = '';
+    });
+    
+    // Сначала скрываем все секции
+    Object.keys(containers).forEach(category => {
+        const sectionHeader = document.querySelector(`#${category}-boxes`);
+        const container = containers[category];
+        
+        if (sectionHeader) sectionHeader.style.display = 'none';
+        if (container) container.style.display = 'none';
+    });
     
     // Фильтруем продукты
     const filteredProducts = productsData.filter(product => {
         const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
                              product.description.toLowerCase().includes(searchTerm);
-        const matchesCategory = category === 'all' || product.category === category;
+        const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
         
         return matchesSearch && matchesCategory;
     });
     
-    // Отображаем отфильтрованные продукты
-    if (filteredProducts.length === 0) {
-        container.innerHTML = `
-            <div class="col-12 text-center py-5">
-                <h3>Продукты не найдены</h3>
-                <p>Попробуйте изменить параметры поиска</p>
-            </div>
-        `;
-    } else {
-        filteredProducts.forEach(product => {
+    // Распределяем отфильтрованные продукты по категориям
+    filteredProducts.forEach(product => {
+        const container = containers[product.category];
+        if (container) {
             const productCard = createProductCard(product);
             container.appendChild(productCard);
-        });
+        }
+    });
+    
+    // Показываем только непустые секции
+    Object.entries(containers).forEach(([category, container]) => {
+        if (container && container.children.length > 0) {
+            const sectionHeader = document.querySelector(`#${category}-boxes`);
+            if (sectionHeader) {
+                sectionHeader.style.display = 'block';
+            }
+            container.style.display = 'flex';
+        }
+    });
+    
+    // Если нет товаров, показываем сообщение
+    if (filteredProducts.length === 0) {
+        const mainContainer = document.getElementById('productsContainer');
+        if (mainContainer) {
+            const noProductsMsg = document.createElement('div');
+            noProductsMsg.className = 'col-12 text-center py-5';
+            noProductsMsg.innerHTML = `
+                <h3>Продукты не найдены</h3>
+                <p>Попробуйте изменить параметры поиска</p>
+            `;
+            mainContainer.appendChild(noProductsMsg);
+        }
     }
 }
 
