@@ -1,0 +1,181 @@
+/* css/styles.css */
+
+:root {
+    --primary-color: #2c6e49;
+    --secondary-color: #4c956c;
+    --accent-color: #fefee3;
+    --light-color: #ffc9b9;
+    --dark-color: #1d3557;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    padding-top: 76px; /* Для фиксированного навбара */
+}
+
+/* Навигация */
+.navbar-brand {
+    font-weight: 700;
+    color: var(--primary-color) !important;
+}
+
+.nav-link.active {
+    color: var(--primary-color) !important;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Герой-секция */
+.hero-section {
+    background: linear-gradient(rgba(44, 110, 73, 0.85), rgba(44, 110, 73, 0.9)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+    margin-bottom: 50px;
+}
+
+.section-title {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--light-color);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* Карточки продуктов */
+.product-card {
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.product-card:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+
+.product-img {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.price {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Кнопки */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Футер */
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    margin-top: 50px;
+}
+
+/* Формы */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(44, 110, 73, 0.25);
+}
+
+/* Кнопка "Наверх" */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    z-index: 1000;
+}
+
+/* Навигация внутри страницы */
+.page-nav {
+    position: sticky;
+    top: 100px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.page-nav a {
+    color: var(--dark-color);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.page-nav a:hover {
+    color: var(--primary-color);
+}
+
+.internal-nav {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.internal-nav a {
+    color: var(--dark-color);
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.internal-nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Шаги производства */
+.production-step {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-left: 4px solid var(--primary-color);
+    background-color: #f9f9f9;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .page-nav {
+        position: static;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding-top: 66px;
+    }
+}
