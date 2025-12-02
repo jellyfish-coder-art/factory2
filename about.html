@@ -1,0 +1,197 @@
+<!-- about.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О заводе - КартонПро</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Иконки Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Наши стили -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-box-seam me-2"></i>КартонПро
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about.html">О заводе</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Продукция</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order.html">Заказать</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Страница "О заводе" -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="page-nav">
+                    <h5>Навигация по странице</h5>
+                    <a href="#section1">История завода</a>
+                    <a href="#section2">Производственный процесс</a>
+                    <a href="#section3">Наше оборудование</a>
+                    <a href="#section4">Экологическая ответственность</a>
+                    <a href="#top">К началу страницы</a>
+                </div>
+            </div>
+            
+            <div class="col-lg-9">
+                <!-- Внутренняя навигация для мобильных устройств -->
+                <div class="internal-nav d-lg-none">
+                    <a href="#section1">История</a>
+                    <a href="#section2">Процесс</a>
+                    <a href="#section3">Оборудование</a>
+                    <a href="#section4">Экология</a>
+                    <a href="#top">В начало</a>
+                </div>
+                
+                <h1 class="mb-4" id="top">О нашем заводе</h1>
+                
+                <div class="production-step">
+                    <h3 id="section1">История завода</h3>
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <p>Завод "КартонПро" был основан в 1995 году как небольшое предприятие по производству картонной тары. За годы работы мы выросли в современное производство с передовыми технологиями и ежегодным выпуском более 50 миллионов коробок.</p>
+                            <p>Сегодня наш завод занимает лидирующие позиции на рынке упаковки благодаря инновационным решениям, высокому качеству продукции и индивидуальному подходу к каждому клиенту.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded" alt="История завода">
+                            <p class="text-muted small mt-2">Наш завод в начале 2000-х годов</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="production-step">
+                    <h3 id="section2">Производственный процесс</h3>
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded" alt="Производственный процесс">
+                            <p class="text-muted small mt-2">Автоматизированная линия производства</p>
+                        </div>
+                        <div class="col-md-8">
+                            <p>Наше производство состоит из нескольких ключевых этапов:</p>
+                            <ol>
+                                <li>Прием и подготовка сырья (целлюлоза, макулатура)</li>
+                                <li>Изготовление картона на современном оборудовании</li>
+                                <li>Раскрой и формирование заготовок</li>
+                                <li>Печать и нанесение маркировки</li>
+                                <li>Фальцовка и склейка коробок</li>
+                                <li>Контроль качества и упаковка готовой продукции</li>
+                            </ol>
+                            <p>Весь процесс автоматизирован и контролируется системами качества, что позволяет нам производить коробки различных размеров и конфигураций с минимальными затратами времени.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="production-step">
+                    <h3 id="section3">Наше оборудование</h3>
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <p>Мы постоянно инвестируем в обновление производственного парка. На заводе установлено:</p>
+                            <ul>
+                                <li>3 автоматические линии по производству гофрокартона</li>
+                                <li>Современные флексографические машины для печати</li>
+                                <li>Высекальные прессы высокой точности</li>
+                                <li>Автоматические линии для сборки коробок</li>
+                                <li>Системы контроля качества с компьютерным зрением</li>
+                            </ul>
+                            <p>Благодаря современному оборудованию мы можем выполнять заказы любой сложности в кратчайшие сроки.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded" alt="Оборудование">
+                            <p class="text-muted small mt-2">Современное оборудование для производства</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="production-step">
+                    <h3 id="section4">Экологическая ответственность</h3>
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <img src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded" alt="Экология">
+                            <p class="text-muted small mt-2">Переработка макулатуры - наш вклад в экологию</p>
+                        </div>
+                        <div class="col-md-8">
+                            <p>Мы понимаем важность экологической ответственности в современном мире. Наш завод:</p>
+                            <ul>
+                                <li>Использует до 80% вторичного сырья в производстве</li>
+                                <li>Имеет замкнутый цикл водопользования</li>
+                                <li>Соблюдает строгие нормы выбросов в атмосферу</li>
+                                <li>Сортирует и передает отходы на переработку</li>
+                                <li>Сертифицирован по системе экологического менеджмента ISO 14001</li>
+                            </ul>
+                            <p>Мы постоянно работаем над снижением экологического следа нашей продукции и повышением ее перерабатываемости.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-5">
+                    <a href="products.html" class="btn btn-primary btn-lg">Посмотреть нашу продукцию</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>КартонПро</h5>
+                    <p>Завод по производству картонно-бумажных коробок с 1995 года.</p>
+                    <p>Качество, надежность, экологичность.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Контакты</h5>
+                    <p><i class="bi bi-geo-alt"></i> г. Москва, ул. Производственная, 15</p>
+                    <p><i class="bi bi-telephone"></i> +7 (495) 123-45-67</p>
+                    <p><i class="bi bi-envelope"></i> info@kartonpro.ru</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Быстрые ссылки</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-light">Главная</a></li>
+                        <li><a href="about.html" class="text-light">О заводе</a></li>
+                        <li><a href="products.html" class="text-light">Продукция</a></li>
+                        <li><a href="order.html" class="text-light">Заказать</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center">
+                <p>&copy; 2023 КартонПро. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Кнопка "Наверх" -->
+    <a href="#" class="btn btn-primary back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Наши скрипты -->
+    <script src="js/navigation.js"></script>
+</body>
+</html>
