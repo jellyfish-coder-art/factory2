@@ -43,118 +43,216 @@
 
     <!-- Страница "О заводе" -->
     <div class="container mt-5">
+        <h1 class="text-center mb-5" id="top">О нашем заводе</h1>
+        
+        <!-- Навигация в виде закладок -->
+        <div class="quick-links d-lg-none mb-4">
+            <h6>Быстрые ссылки:</h6>
+            <div class="btn-group flex-wrap" role="group">
+                <a href="#history-tab" class="btn btn-outline-primary btn-sm mb-1">История</a>
+                <a href="#process-tab" class="btn btn-outline-primary btn-sm mb-1">Процесс</a>
+                <a href="#equipment-tab" class="btn btn-outline-primary btn-sm mb-1">Оборудование</a>
+                <a href="#ecology-tab" class="btn btn-outline-primary btn-sm mb-1">Экология</a>
+                <a href="#top" class="btn btn-outline-primary btn-sm mb-1">Наверх</a>
+            </div>
+        </div>
+        
         <div class="row">
-            <div class="col-lg-3">
-                <div class="page-nav">
-                    <h5>Навигация по странице</h5>
-                    <a href="#section1">История завода</a>
-                    <a href="#section2">Производственный процесс</a>
-                    <a href="#section3">Наше оборудование</a>
-                    <a href="#section4">Экологическая ответственность</a>
-                    <a href="#top">К началу страницы</a>
+            <div class="col-lg-3 mb-4">
+                <!-- Боковая навигация в виде списка закладок -->
+                <div class="page-nav card">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">Навигация по странице</h5>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <a href="#history-tab" class="list-group-item list-group-item-action active" data-bs-toggle="tab" data-bs-target="#history">
+                            <i class="bi bi-clock-history me-2"></i>История завода
+                        </a>
+                        <a href="#process-tab" class="list-group-item list-group-item-action" data-bs-toggle="tab" data-bs-target="#process">
+                            <i class="bi bi-gear me-2"></i>Производственный процесс
+                        </a>
+                        <a href="#equipment-tab" class="list-group-item list-group-item-action" data-bs-toggle="tab" data-bs-target="#equipment">
+                            <i class="bi bi-cpu me-2"></i>Наше оборудование
+                        </a>
+                        <a href="#ecology-tab" class="list-group-item list-group-item-action" data-bs-toggle="tab" data-bs-target="#ecology">
+                            <i class="bi bi-tree me-2"></i>Экологическая ответственность
+                        </a>
+                        <a href="#top" class="list-group-item list-group-item-action">
+                            <i class="bi bi-arrow-up me-2"></i>К началу страницы
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Графическая гиперссылка -->
+                <div class="card mt-4">
+                    <div class="card-body text-center">
+                        <p class="card-text">Посмотрите наши работы</p>
+                        <a href="products.html" class="graphic-link">
+                            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+                                 class="img-fluid rounded" 
+                                 alt="Наша продукция">
+                        </a>
+                        <p class="small text-muted mt-2">Кликните для просмотра продукции</p>
+                    </div>
                 </div>
             </div>
             
             <div class="col-lg-9">
-                <!-- Внутренняя навигация для мобильных устройств -->
-                <div class="internal-nav d-lg-none">
-                    <a href="#section1">История</a>
-                    <a href="#section2">Процесс</a>
-                    <a href="#section3">Оборудование</a>
-                    <a href="#section4">Экология</a>
-                    <a href="#top">В начало</a>
-                </div>
-                
-                <h1 class="mb-4" id="top">О нашем заводе</h1>
-                
-                <div class="production-step">
-                    <h3 id="section1">История завода</h3>
-                    <div class="row align-items-center">
-                        <div class="col-md-8">
-                            <p>Завод "КартонПро" был основан в 1995 году как небольшое предприятие по производству картонной тары. За годы работы мы выросли в современное производство с передовыми технологиями и ежегодным выпуском более 50 миллионов коробок.</p>
-                            <p>Сегодня наш завод занимает лидирующие позиции на рынке упаковки благодаря инновационным решениям, высокому качеству продукции и индивидуальному подходу к каждому клиенту.</p>
+                <!-- Контент в виде закладок -->
+                <div class="tab-content" id="aboutTabsContent">
+                    <!-- Закладка 1: История -->
+                    <div class="tab-pane fade show active" id="history" role="tabpanel">
+                        <div class="production-step">
+                            <h3>История завода</h3>
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <p>Завод "КартонПро" был основан в 1995 году как небольшое предприятие по производству картонной тары. За годы работы мы выросли в современное производство с передовыми технологиями и ежегодным выпуском более 50 миллионов коробок.</p>
+                                    <p>Сегодня наш завод занимает лидирующие позиции на рынке упаковки благодаря инновационным решениям, высокому качеству продукции и индивидуальному подходу к каждому клиенту.</p>
+                                    <div class="mt-4">
+                                        <h6>Ключевые этапы развития:</h6>
+                                        <ul>
+                                            <li><strong>1995</strong> - Основание завода</li>
+                                            <li><strong>2002</strong> - Модернизация оборудования</li>
+                                            <li><strong>2010</strong> - Выход на международный рынок</li>
+                                            <li><strong>2018</strong> - Получение сертификата ISO 9001</li>
+                                            <li><strong>2023</strong> - Запуск новой автоматической линии</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- Графическая гиперссылка -->
+                                    <a href="products.html" title="Посмотреть нашу продукцию">
+                                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded" alt="История завода">
+                                    </a>
+                                    <p class="text-muted small mt-2">Наш завод в начале 2000-х годов</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <!-- Графическая гиперссылка -->
-                            <a href="products.html" title="Посмотреть нашу продукцию">
-                                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded" alt="История завода">
-                            </a>
-                            <p class="text-muted small mt-2">Наш завод в начале 2000-х годов</p>
+                    </div>
+                    
+                    <!-- Закладка 2: Процесс -->
+                    <div class="tab-pane fade" id="process" role="tabpanel">
+                        <div class="production-step">
+                            <h3>Производственный процесс</h3>
+                            <div class="row align-items-center">
+                                <div class="col-md-4">
+                                    <!-- Графическая гиперссылка -->
+                                    <a href="order.html" title="Заказать коробки">
+                                        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded" alt="Производственный процесс">
+                                    </a>
+                                    <p class="text-muted small mt-2">Автоматизированная линия производства</p>
+                                </div>
+                                <div class="col-md-8">
+                                    <p>Наше производство состоит из нескольких ключевых этапов:</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <ol>
+                                                <li>Прием и подготовка сырья</li>
+                                                <li>Изготовление картона</li>
+                                                <li>Раскрой заготовок</li>
+                                            </ol>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ol start="4">
+                                                <li>Печать и маркировка</li>
+                                                <li>Фальцовка и склейка</li>
+                                                <li>Контроль качества</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3">Весь процесс автоматизирован и контролируется системами качества, что позволяет нам производить коробки различных размеров и конфигураций с минимальными затратами времени.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Закладка 3: Оборудование -->
+                    <div class="tab-pane fade" id="equipment" role="tabpanel">
+                        <div class="production-step">
+                            <h3>Наше оборудование</h3>
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <p>Мы постоянно инвестируем в обновление производственного парка. На заводе установлено:</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li>Автоматические линии гофрокартона</li>
+                                                <li>Флексографические машины</li>
+                                                <li>Высекальные прессы</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li>Линии сборки коробок</li>
+                                                <li>Системы контроля качества</li>
+                                                <li>Роботизированные упаковщики</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <p>Благодаря современному оборудованию мы можем выполнять заказы любой сложности в кратчайшие сроки.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- Графическая гиперссылка -->
+                                    <a href="index.html" title="На главную страницу">
+                                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded" alt="Оборудование">
+                                    </a>
+                                    <p class="text-muted small mt-2">Современное оборудование для производства</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Закладка 4: Экология -->
+                    <div class="tab-pane fade" id="ecology" role="tabpanel">
+                        <div class="production-step">
+                            <h3>Экологическая ответственность</h3>
+                            <div class="row align-items-center">
+                                <div class="col-md-4">
+                                    <!-- Графическая гиперссылка -->
+                                    <a href="about.html#ecology" title="Подробнее об экологии">
+                                        <img src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded" alt="Экология">
+                                    </a>
+                                    <p class="text-muted small mt-2">Переработка макулатуры - наш вклад в экологию</p>
+                                </div>
+                                <div class="col-md-8">
+                                    <p>Мы понимаем важность экологической ответственности в современном мире. Наш завод:</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li>Использует 80% вторичного сырья</li>
+                                                <li>Замкнутый цикл водопользования</li>
+                                                <li>Соблюдает нормы выбросов</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li>Сортировка отходов</li>
+                                                <li>Сертификат ISO 14001</li>
+                                                <li>Программа переработки</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3">Мы постоянно работаем над снижением экологического следа нашей продукции и повышением ее перерабатываемости.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="production-step">
-                    <h3 id="section2">Производственный процесс</h3>
-                    <div class="row align-items-center">
-                        <div class="col-md-4">
-                            <!-- Графическая гиперссылка -->
-                            <a href="order.html" title="Заказать коробки">
-                                <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded" alt="Производственный процесс">
-                            </a>
-                            <p class="text-muted small mt-2">Автоматизированная линия производства</p>
-                        </div>
-                        <div class="col-md-8">
-                            <p>Наше производство состоит из нескольких ключевых этапов:</p>
-                            <ol>
-                                <li>Прием и подготовка сырья (целлюлоза, макулатура)</li>
-                                <li>Изготовление картона на современном оборудовании</li>
-                                <li>Раскрой и формирование заготовок</li>
-                                <li>Печать и нанесение маркировки</li>
-                                <li>Фальцовка и склейка коробок</li>
-                                <li>Контроль качества и упаковка готовой продукции</li>
-                            </ol>
-                            <p>Весь процесс автоматизирован и контролируется системами качества, что позволяет нам производить коробки различных размеров и конфигураций с минимальными затратами времени.</p>
-                        </div>
+                <!-- Навигация между закладками внизу -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button class="btn btn-outline-primary" onclick="switchTab('history')">
+                        <i class="bi bi-chevron-left me-1"></i> История завода
+                    </button>
+                    <div class="btn-group">
+                        <button class="btn btn-outline-primary" onclick="switchTab('history')">1</button>
+                        <button class="btn btn-outline-primary" onclick="switchTab('process')">2</button>
+                        <button class="btn btn-outline-primary" onclick="switchTab('equipment')">3</button>
+                        <button class="btn btn-outline-primary" onclick="switchTab('ecology')">4</button>
                     </div>
-                </div>
-                
-                <div class="production-step">
-                    <h3 id="section3">Наше оборудование</h3>
-                    <div class="row align-items-center">
-                        <div class="col-md-8">
-                            <p>Мы постоянно инвестируем в обновление производственного парка. На заводе установлено:</p>
-                            <ul>
-                                <li>3 автоматические линии по производству гофрокартона</li>
-                                <li>Современные флексографические машины для печати</li>
-                                <li>Высекальные прессы высокой точности</li>
-                                <li>Автоматические линии для сборки коробок</li>
-                                <li>Системы контроля качества с компьютерным зрением</li>
-                            </ul>
-                            <p>Благодаря современному оборудованию мы можем выполнять заказы любой сложности в кратчайшие сроки.</p>
-                        </div>
-                        <div class="col-md-4">
-                            <!-- Графическая гиперссылка -->
-                            <a href="index.html" title="На главную страницу">
-                                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded" alt="Оборудование">
-                            </a>
-                            <p class="text-muted small mt-2">Современное оборудование для производства</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="production-step">
-                    <h3 id="section4">Экологическая ответственность</h3>
-                    <div class="row align-items-center">
-                        <div class="col-md-4">
-                            <!-- Графическая гиперссылка -->
-                            <a href="about.html#section4" title="Подробнее об экологии">
-                                <img src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded" alt="Экология">
-                            </a>
-                            <p class="text-muted small mt-2">Переработка макулатуры - наш вклад в экологию</p>
-                        </div>
-                        <div class="col-md-8">
-                            <p>Мы понимаем важность экологической ответственности в современном мире. Наш завод:</p>
-                            <ul>
-                                <li>Использует до 80% вторичного сырья в производстве</li>
-                                <li>Имеет замкнутый цикл водопользования</li>
-                                <li>Соблюдает строгие нормы выбросов в атмосферу</li>
-                                <li>Сортирует и передает отходы на переработку</li>
-                                <li>Сертифицирован по системе экологического менеджмента ISO 14001</li>
-                            </ul>
-                            <p>Мы постоянно работаем над снижением экологического следа нашей продукции и повышением ее перерабатываемости.</p>
-                        </div>
-                    </div>
+                    <button class="btn btn-outline-primary" onclick="switchTab('process')">
+                        Производственный процесс <i class="bi bi-chevron-right ms-1"></i>
+                    </button>
                 </div>
                 
                 <div class="text-center mt-5">
@@ -205,5 +303,55 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Наши скрипты -->
     <script src="js/navigation.js"></script>
+    <script>
+        // Функция для переключения закладок
+        function switchTab(tabId) {
+            // Скрываем все закладки
+            document.querySelectorAll('.tab-pane').forEach(tab => {
+                tab.classList.remove('show', 'active');
+            });
+            
+            // Показываем выбранную закладку
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                targetTab.classList.add('show', 'active');
+            }
+            
+            // Обновляем активную ссылку в навигации
+            document.querySelectorAll('.list-group-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-bs-target') === `#${tabId}`) {
+                    item.classList.add('active');
+                }
+            });
+        }
+        
+        // Инициализация закладок при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            // Активируем первую закладку по умолчанию
+            switchTab('history');
+            
+            // Обработчик для якорных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    if (href.startsWith('#') && href !== '#top') {
+                        const tabId = href.replace('#', '').replace('-tab', '');
+                        if (tabId && ['history', 'process', 'equipment', 'ecology'].includes(tabId)) {
+                            e.preventDefault();
+                            switchTab(tabId);
+                            
+                            // Плавная прокрутка к началу контента
+                            const contentStart = document.querySelector('.tab-content');
+                            if (contentStart) {
+                                contentStart.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
