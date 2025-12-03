@@ -18,23 +18,15 @@ function initOrderForm() {
     
     if (!orderForm) return;
     
-// Валидация формы перед отправкой
-orderForm.addEventListener('submit', function(event) {
-    // Всегда предотвращаем стандартную отправку
-    event.preventDefault();
-    
-    if (validateForm()) {
-        // Наша функция подготовит данные и покажет сообщение
-        const shouldSubmit = sendOrderData();
+    // Валидация формы перед отправкой
+    orderForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Всегда предотвращаем стандартную отправку
         
-        // Через 2 секунды отправляем форму в Google
-        if (shouldSubmit === false) {
-            setTimeout(() => {
-                this.submit(); // Отправляем форму в Google
-            }, 2000);
+        if (validateForm()) {
+            // Наша функция обработает отправку в Google
+            sendOrderData();
         }
-    }
-});
+    });
     
     // Обновление сводки заказа при изменении формы
     orderForm.addEventListener('change', updateOrderSummary);
@@ -316,7 +308,7 @@ function getBoxName(boxType) {
     return names[boxType] || 'Не выбрано';
 }
 
-// Функция получения текста способа оплаты
+// Функция получения текста способа оплата
 function getPaymentMethodText(paymentMethod) {
     const methods = {
         'cash': 'Наличные при получении',
@@ -369,49 +361,45 @@ function initOrderCalculator() {
     }
 }
 
-// Функция отправки данных заказа (упрощенная для Google)
+// Функция отправки данных заказа (открывает Google с поиском)
 function sendOrderData() {
     const form = document.getElementById('orderForm');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
     
-    // Формируем динамический поисковый запрос
+    // Показываем индикатор загрузки
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Перенаправление...';
+    submitBtn.disabled = true;
+    
+    // Получаем данные из формы для поискового запроса
     const customerName = document.getElementById('customerName').value;
     const boxType = document.getElementById('boxType').value;
     const quantity = document.getElementById('quantity').value || 0;
     const boxName = getBoxName(boxType);
     
-    // Создаем поисковый запрос
-    let searchQuery = `Заказ картонных коробок`;
+    // Формируем поисковый запрос для Google
+    let searchQuery = 'Заказ картонных коробок';
     if (customerName) searchQuery += ` для ${customerName}`;
-    if (boxName) searchQuery += `, тип: ${boxName}`;
+    if (boxName && boxName !== 'Не выбрано') searchQuery += `, тип: ${boxName}`;
     if (quantity) searchQuery += `, количество: ${quantity} шт`;
     
-    // Обновляем скрытое поле q
-    const qField = form.querySelector('input[name="q"]');
-    if (qField) {
-        qField.value = searchQuery;
-    }
+    // Кодируем запрос для URL
+    const encodedQuery = encodeURIComponent(searchQuery);
     
-    // Показываем индикатор загрузки
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Перенаправление в Google...';
-    submitBtn.disabled = true;
+    // Генерируем ID заказа для сообщения
+    const orderId = 'ORD-' + Date.now();
     
     // Показываем сообщение об успехе
-    const orderId = 'ORD-' + Date.now();
-    showSuccessMessage(orderId);
-    
-    // Через 1.5 секунды разрешаем отправку формы
     setTimeout(() => {
-        // Форма отправится автоматически в Google
-        // Восстанавливаем кнопку
+        showSuccessMessage(orderId);
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
+        
+        // Открываем Google с поисковым запросом в новой вкладке
+        window.open(`https://www.google.com/search?q=${encodedQuery}`, '_blank');
     }, 1500);
-    
-    // Предотвращаем мгновенную отправку
-    return false;
 }
+
 // Функция показа сообщения об успехе
 function showSuccessMessage(orderId) {
     // Создаем красивый alert
@@ -427,7 +415,7 @@ function showSuccessMessage(orderId) {
                 <hr>
                 <p class="mb-0 small">
                     <i class="bi bi-info-circle me-1"></i>
-                    Копия заказа отправлена на ваш email.
+                    Открываю поиск в Google...
                 </p>
             </div>
         </div>
