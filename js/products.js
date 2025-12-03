@@ -24,7 +24,7 @@ const productsData = [
         description: "Подходит для упаковки книг, обуви, бытовой техники.",
         price: "от 18 руб./шт",
         category: "medium",
-        image: "images/middle-box.webp"
+        image: "images/box.avif"
     },
     {
         id: 3,
