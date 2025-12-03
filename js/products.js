@@ -16,7 +16,7 @@ const productsData = [
         description: "Идеальна для упаковки небольших товаров, канцелярии, косметики.",
         price: "от 12 руб./шт",
         category: "small",
-        image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        image: "images/small-box.jpg"
     },
     {
         id: 2,
@@ -24,7 +24,7 @@ const productsData = [
         description: "Подходит для упаковки книг, обуви, бытовой техники.",
         price: "от 18 руб./шт",
         category: "medium",
-        image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        image: "images/middle-box.webp"
     },
     {
         id: 3,
@@ -32,7 +32,7 @@ const productsData = [
         description: "Для крупногабаритных товаров, переездов, хранения вещей.",
         price: "от 25 руб./шт",
         category: "large",
-        image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        image: "images/large-box.jpg"
     },
     {
         id: 4,
@@ -40,7 +40,7 @@ const productsData = [
         description: "Элегантная упаковка для подарков с дизайнерской печатью.",
         price: "от 35 руб./шт",
         category: "special",
-        image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        image: "images/gift-box.jpg"
     },
     {
         id: 5,
@@ -48,7 +48,7 @@ const productsData = [
         description: "Специальная коробка для доставки пиццы и другой еды.",
         price: "от 8 руб./шт",
         category: "special",
-        image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        image: "images/pizza-box.png"
     },
     {
         id: 6,
@@ -56,7 +56,7 @@ const productsData = [
         description: "Прочная коробка для переездов с усиленными стенками.",
         price: "от 30 руб./шт",
         category: "large",
-        image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        image: "images/move-box.webp"
     },
     {
         id: 7,
@@ -64,7 +64,7 @@ const productsData = [
         description: "Защитная упаковка для телефонов, планшетов и другой техники.",
         price: "от 15 руб./шт",
         category: "small",
-        image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        image: "images/electronic-box.jpg"
     },
     {
         id: 8,
@@ -72,7 +72,7 @@ const productsData = [
         description: "Стильная упаковка для косметических средств и парфюмерии.",
         price: "от 20 руб./шт",
         category: "medium",
-        image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        image: "images/cosmetics-box.jpg"
     },
     {
         id: 9,
@@ -80,7 +80,7 @@ const productsData = [
         description: "Специальная упаковка для бутылок вина и других напитков.",
         price: "от 22 руб./шт",
         category: "special",
-        image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        image: "images/vine-box.jpg"
     },
     {
         id: 10,
@@ -88,7 +88,7 @@ const productsData = [
         description: "Архивная коробка для хранения документов и бумаг.",
         price: "от 28 руб./шт",
         category: "medium",
-        image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        image: "images/office-box.webp"
     },
     {
         id: 11,
@@ -96,7 +96,7 @@ const productsData = [
         description: "Яркая коробка для детских игрушек с безопасными краями.",
         price: "от 16 руб./шт",
         category: "small",
-        image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        image: "images/kids-box.jpg"
     },
     {
         id: 12,
@@ -104,7 +104,7 @@ const productsData = [
         description: "Элегантная коробка для букетов и цветочных композиций.",
         price: "от 32 руб./шт",
         category: "special",
-        image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        image: "images/flower-box.jpg"
     }
 ];
 
