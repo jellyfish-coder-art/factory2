@@ -18,14 +18,23 @@ function initOrderForm() {
     
     if (!orderForm) return;
     
-    // Валидация формы перед отправкой
-    orderForm.addEventListener('submit', function(event) {
+   // Валидация формы перед отправкой
+orderForm.addEventListener('submit', function(event) {
+    // Разрешаем отправку формы Formspree если она валидна
+    if (!validateForm()) {
+        // Только если форма не валидна - останавливаем отправку
         event.preventDefault();
-        
-        if (validateForm()) {
-            sendOrderData();
-        }
-    });
+        return false;
+    }
+    
+    // Если форма валидна:
+    // 1. Показываем наш индикатор
+    // 2. Позволяем Formspree отправить форму
+    sendOrderData();
+    
+    // НЕ предотвращаем стандартное поведение!
+    // Форма должна отправиться на Formspree
+});
     
     // Обновление сводки заказа при изменении формы
     orderForm.addEventListener('change', updateOrderSummary);
@@ -360,79 +369,53 @@ function initOrderCalculator() {
     }
 }
 
-// Функция отправки данных заказа
+// Функция отправки данных заказа (упрощенная для Formspree)
 function sendOrderData() {
     const form = document.getElementById('orderForm');
-    const formData = new FormData(form);
-    const orderData = {};
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
     
-    // Преобразуем FormData в объект
-    formData.forEach((value, key) => {
-        orderData[key] = value;
-    });
+    // Показываем индикатор загрузки
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Отправка...';
+    submitBtn.disabled = true;
     
-    // Добавляем дополнительную информацию
-    orderData.orderDate = new Date().toISOString();
-    orderData.orderId = 'ORD-' + Date.now();
-    orderData.orderStatus = 'pending';
+    // Генерируем ID заказа
+    const orderId = 'ORD-' + Date.now();
     
-    // Рассчитываем итоговую стоимость
+    // Добавляем сводку заказа как скрытое поле (опционально)
     const boxType = document.getElementById('boxType').value;
     const quantity = document.getElementById('quantity').value || 0;
     const deliverySpeed = document.querySelector('input[name="deliverySpeed"]:checked')?.value;
     const pricePerUnit = getPricePerUnit(boxType);
-    orderData.totalPrice = calculateTotalPrice(pricePerUnit, quantity, deliverySpeed);
-    orderData.pricePerUnit = pricePerUnit;
+    const totalPrice = calculateTotalPrice(pricePerUnit, quantity, deliverySpeed);
+    const boxName = getBoxName(boxType);
     
-    // Добавляем информацию о продукте
-    orderData.boxName = getBoxName(boxType);
+    let orderSummary = `Тип коробки: ${boxName}\n`;
+    orderSummary += `Количество: ${quantity} шт\n`;
+    orderSummary += `Итого: ${totalPrice.toLocaleString('ru-RU')} руб\n`;
+    orderSummary += `ID заказа: ${orderId}`;
     
-    console.log('Данные для отправки:', orderData);
+    // Создаем скрытое поле для сводки заказа
+    let summaryField = document.getElementById('orderSummaryHidden');
+    if (!summaryField) {
+        summaryField = document.createElement('textarea');
+        summaryField.id = 'orderSummaryHidden';
+        summaryField.name = 'order_summary';
+        summaryField.style.display = 'none';
+        form.appendChild(summaryField);
+    }
+    summaryField.value = orderSummary;
     
-    // Показываем индикатор загрузки
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Отправка...';
-    submitBtn.disabled = true;
-    
-    // Отправка данных на удаленный сервер (JSONPlaceholder для примера)
-    fetch('https://jsonplaceholder.typicode.com/posts', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderData),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Ошибка сети');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Успешно отправлено:', data);
-        showSuccessMessage(orderData.orderId);
-        
-        // Очищаем форму
-        form.reset();
-        
-        // Сбрасываем валидационные стили
-        form.querySelectorAll('.is-valid, .is-invalid').forEach(field => {
-            field.classList.remove('is-valid', 'is-invalid');
-        });
-        
-        // Обновляем сводку
-        updateOrderSummary();
-    })
-    .catch(error => {
-        console.error('Ошибка:', error);
-        showErrorMessage();
-    })
-    .finally(() => {
-        // Восстанавливаем кнопку
+    // Formspree отправит форму автоматически
+    // Мы просто показываем уведомление через 1.5 секунды
+    setTimeout(() => {
+        showSuccessMessage(orderId);
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
-    });
+    }, 1500);
+    
+   
+    return true;
 }
 
 // Функция показа сообщения об успехе
