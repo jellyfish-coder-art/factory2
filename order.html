@@ -90,7 +90,18 @@
                         <h4>Форма заказа</h4>
                     </div>
                     <div class="card-body">
-                        <form id="orderForm" action="https://www.google.com/search" method="GET" target="_blank">
+                      <form id="orderForm" action="https://www.google.com/search" method="GET" target="_blank">
+    <input type="hidden" name="q" value="Заказ картонных коробок на КартонПро">
+    
+    <!-- Ваши поля -->
+    <div class="mb-3">
+        <label for="customerName">Имя</label>
+        <input type="text" id="customerName" name="customer">
+    </div>
+    
+    <!-- При отправке форма откроет Google с поиском -->
+    <button type="submit">Заказать</button>
+</form>
                             <!-- Раздел 1: Личные данные -->
                             <h5 id="personal-data" class="mb-3 section-title">Личные данные</h5>
                             
