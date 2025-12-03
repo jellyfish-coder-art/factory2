@@ -75,7 +75,7 @@
                     <div class="card-body text-center">
                         <p class="card-text">Посмотрите нашу продукцию</p>
                         <a href="products.html" class="graphic-link">
-                            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+                            <img src="production-line.jpg" 
                                  class="img-fluid rounded" 
                                  alt="Наша продукция">
                         </a>
@@ -90,141 +90,135 @@
                         <h4>Форма заказа</h4>
                     </div>
                     <div class="card-body">
-                      <form id="orderForm" action="https://www.google.com/search" method="GET" target="_blank">
-    <input type="hidden" name="q" value="Заказ картонных коробок на КартонПро">
+                     <form id="orderForm" action="https://www.google.com/search" method="GET" target="_blank">
+    <!-- Скрытые поля для Google -->
+    <input type="hidden" name="q" value="Заказ картонных коробок">
+    <input type="hidden" name="oq" value="картонные коробки">
+    <input type="hidden" name="source" value="chrome">
+    <input type="hidden" name="ie" value="UTF-8">
     
-    <!-- Ваши поля -->
+    <!-- Раздел 1: Личные данные -->
+    <h5 id="personal-data" class="mb-3 section-title">Личные данные</h5>
+    
     <div class="mb-3">
-        <label for="customerName">Имя</label>
-        <input type="text" id="customerName" name="customer">
+        <label for="customerName" class="form-label">Ваше имя *</label>
+        <input type="text" class="form-control" id="customerName" name="customer" required>
     </div>
     
-    <!-- При отправке форма откроет Google с поиском -->
-    <button type="submit">Заказать</button>
+    <div class="mb-3">
+        <label for="customerEmail" class="form-label">Email *</label>
+        <input type="email" class="form-control" id="customerEmail" name="email" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Телефон *</label>
+        <input type="tel" class="form-control" id="phoneNumber" name="phone" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="deliveryAddress" class="form-label">Адрес доставки *</label>
+        <textarea class="form-control" id="deliveryAddress" name="address" rows="2" required></textarea>
+    </div>
+    
+    <!-- Раздел 2: Детали заказа -->
+    <h5 id="order-details" class="mb-3 mt-4 section-title">Детали заказа</h5>
+    
+    <div class="mb-3">
+        <label for="boxType" class="form-label">Тип коробки *</label>
+        <select class="form-select" id="boxType" name="boxType" required>
+            <option value="">Выберите тип коробки</option>
+            <option value="small">Малая коробка</option>
+            <option value="medium">Средняя коробка</option>
+            <option value="large">Крупная коробка</option>
+            <option value="special">Специальная коробка</option>
+        </select>
+    </div>
+    
+    <div class="mb-3">
+        <label for="quantity" class="form-label">Количество *</label>
+        <input type="number" class="form-control" id="quantity" name="quantity" min="100" max="10000" value="100" required>
+        <div class="form-text">Минимальный заказ: 100 шт</div>
+    </div>
+    
+    <div class="mb-3">
+        <label for="boxSize" class="form-label">Размер коробки (необязательно)</label>
+        <input type="text" class="form-control" id="boxSize" name="boxSize" placeholder="Например: 30x20x15 см">
+    </div>
+    
+    <!-- Раздел 3: Доставка и оплата -->
+    <h5 id="delivery-payment" class="mb-3 mt-4 section-title">Доставка и оплата</h5>
+    
+    <div class="mb-3">
+        <label class="form-label">Срочность заказа *</label>
+        <div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="deliverySpeed" id="deliveryNormal" value="normal" checked>
+                <label class="form-check-label" for="deliveryNormal">
+                    Стандартная доставка (7-10 дней)
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="deliverySpeed" id="deliveryExpress" value="express">
+                <label class="form-check-label" for="deliveryExpress">
+                    Срочная доставка (3-5 дней) + 15%
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label">Способ оплаты *</label>
+        <div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCash" value="cash" checked>
+                <label class="form-check-label" for="paymentCash">
+                    Наличные при получении
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCard" value="card">
+                <label class="form-check-label" for="paymentCard">
+                    Безналичный расчет (по счету)
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="paymentOnline" value="online">
+                <label class="form-check-label" for="paymentOnline">
+                    Онлайн оплата картой
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Раздел 4: Дополнительно -->
+    <h5 class="mb-3 mt-4">Дополнительная информация</h5>
+    
+    <div class="mb-3">
+        <label for="orderComments" class="form-label">Комментарии к заказу</label>
+        <textarea class="form-control" id="orderComments" name="orderComments" rows="3" placeholder="Укажите особые требования к коробкам, цвету печати и т.д."></textarea>
+    </div>
+    
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" id="agreeTerms" name="agreeTerms" required>
+        <label class="form-check-label" for="agreeTerms">
+            Я согласен с условиями обработки персональных данных и политикой конфиденциальности
+        </label>
+    </div>
+    
+    <div class="form-check mb-4">
+        <input class="form-check-input" type="checkbox" id="subscribeNews" name="subscribeNews">
+        <label class="form-check-label" for="subscribeNews">
+            Подписаться на новости и специальные предложения
+        </label>
+    </div>
+    
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary btn-lg">
+            <i class="bi bi-search me-2"></i>Отправить заказ
+        </button>
+        <button type="reset" class="btn btn-outline-secondary">Очистить форму</button>
+    </div>
 </form>
-                            <!-- Раздел 1: Личные данные -->
-                            <h5 id="personal-data" class="mb-3 section-title">Личные данные</h5>
-                            
-                            <div class="mb-3">
-                                <label for="customerName" class="form-label">Ваше имя *</label>
-                                <input type="text" class="form-control" id="customerName" name="customerName" required>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="customerEmail" class="form-label">Email *</label>
-                                <input type="email" class="form-control" id="customerEmail" name="customerEmail" required>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="phoneNumber" class="form-label">Телефон *</label>
-                                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="deliveryAddress" class="form-label">Адрес доставки *</label>
-                                <textarea class="form-control" id="deliveryAddress" name="deliveryAddress" rows="2" required></textarea>
-                            </div>
-                            
-                            <!-- Раздел 2: Детали заказа -->
-                            <h5 id="order-details" class="mb-3 mt-4 section-title">Детали заказа</h5>
-                            
-                            <div class="mb-3">
-                                <label for="boxType" class="form-label">Тип коробки *</label>
-                                <select class="form-select" id="boxType" name="boxType" required>
-                                    <option value="">Выберите тип коробки</option>
-                                    <option value="small">Малая коробка</option>
-                                    <option value="medium">Средняя коробка</option>
-                                    <option value="large">Крупная коробка</option>
-                                    <option value="special">Специальная коробка</option>
-                                </select>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="quantity" class="form-label">Количество *</label>
-                                <input type="number" class="form-control" id="quantity" name="quantity" min="100" max="10000" value="100" required>
-                                <div class="form-text">Минимальный заказ: 100 шт</div>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="boxSize" class="form-label">Размер коробки (необязательно)</label>
-                                <input type="text" class="form-control" id="boxSize" name="boxSize" placeholder="Например: 30x20x15 см">
-                            </div>
-                            
-                            <!-- Раздел 3: Доставка и оплата -->
-                            <h5 id="delivery-payment" class="mb-3 mt-4 section-title">Доставка и оплата</h5>
-                            
-                            <div class="mb-3">
-                                <label class="form-label">Срочность заказа *</label>
-                                <div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="deliverySpeed" id="deliveryNormal" value="normal" checked>
-                                        <label class="form-check-label" for="deliveryNormal">
-                                            Стандартная доставка (7-10 дней)
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="deliverySpeed" id="deliveryExpress" value="express">
-                                        <label class="form-check-label" for="deliveryExpress">
-                                            Срочная доставка (3-5 дней) + 15%
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label">Способ оплаты *</label>
-                                <div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCash" value="cash" checked>
-                                        <label class="form-check-label" for="paymentCash">
-                                            Наличные при получении
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCard" value="card">
-                                        <label class="form-check-label" for="paymentCard">
-                                            Безналичный расчет (по счету)
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentOnline" value="online">
-                                        <label class="form-check-label" for="paymentOnline">
-                                            Онлайн оплата картой
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Раздел 4: Дополнительно -->
-                            <h5 class="mb-3 mt-4">Дополнительная информация</h5>
-                            
-                            <div class="mb-3">
-                                <label for="orderComments" class="form-label">Комментарии к заказу</label>
-                                <textarea class="form-control" id="orderComments" name="orderComments" rows="3" placeholder="Укажите особые требования к коробкам, цвету печати и т.д."></textarea>
-                            </div>
-                            
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" id="agreeTerms" name="agreeTerms" required>
-                                <label class="form-check-label" for="agreeTerms">
-                                    Я согласен с условиями обработки персональных данных и политикой конфиденциальности
-                                </label>
-                            </div>
-                            
-                            <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" id="subscribeNews" name="subscribeNews">
-                                <label class="form-check-label" for="subscribeNews">
-                                    Подписаться на новости и специальные предложения
-                                </label>
-                            </div>
-                            
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary btn-lg">Отправить заказ</button>
-                                <button type="reset" class="btn btn-outline-secondary">Очистить форму</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                
                 <!-- Сводка заказа -->
                 <div class="card" id="order-summary">
                     <div class="card-header">
