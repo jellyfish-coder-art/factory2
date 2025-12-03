@@ -18,22 +18,22 @@ function initOrderForm() {
     
     if (!orderForm) return;
     
-   // Валидация формы перед отправкой
+// Валидация формы перед отправкой
 orderForm.addEventListener('submit', function(event) {
-    // Разрешаем отправку формы Formspree если она валидна
-    if (!validateForm()) {
-        // Только если форма не валидна - останавливаем отправку
-        event.preventDefault();
-        return false;
+    // Всегда предотвращаем стандартную отправку
+    event.preventDefault();
+    
+    if (validateForm()) {
+        // Наша функция подготовит данные и покажет сообщение
+        const shouldSubmit = sendOrderData();
+        
+        // Через 2 секунды отправляем форму в Google
+        if (shouldSubmit === false) {
+            setTimeout(() => {
+                this.submit(); // Отправляем форму в Google
+            }, 2000);
+        }
     }
-    
-    // Если форма валидна:
-    // 1. Показываем наш индикатор
-    // 2. Позволяем Formspree отправить форму
-    sendOrderData();
-    
-    // НЕ предотвращаем стандартное поведение!
-    // Форма должна отправиться на Formspree
 });
     
     // Обновление сводки заказа при изменении формы
@@ -369,55 +369,49 @@ function initOrderCalculator() {
     }
 }
 
-// Функция отправки данных заказа (упрощенная для Formspree)
+// Функция отправки данных заказа (упрощенная для Google)
 function sendOrderData() {
     const form = document.getElementById('orderForm');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
     
-    // Показываем индикатор загрузки
-    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Отправка...';
-    submitBtn.disabled = true;
-    
-    // Генерируем ID заказа
-    const orderId = 'ORD-' + Date.now();
-    
-    // Добавляем сводку заказа как скрытое поле (опционально)
+    // Формируем динамический поисковый запрос
+    const customerName = document.getElementById('customerName').value;
     const boxType = document.getElementById('boxType').value;
     const quantity = document.getElementById('quantity').value || 0;
-    const deliverySpeed = document.querySelector('input[name="deliverySpeed"]:checked')?.value;
-    const pricePerUnit = getPricePerUnit(boxType);
-    const totalPrice = calculateTotalPrice(pricePerUnit, quantity, deliverySpeed);
     const boxName = getBoxName(boxType);
     
-    let orderSummary = `Тип коробки: ${boxName}\n`;
-    orderSummary += `Количество: ${quantity} шт\n`;
-    orderSummary += `Итого: ${totalPrice.toLocaleString('ru-RU')} руб\n`;
-    orderSummary += `ID заказа: ${orderId}`;
+    // Создаем поисковый запрос
+    let searchQuery = `Заказ картонных коробок`;
+    if (customerName) searchQuery += ` для ${customerName}`;
+    if (boxName) searchQuery += `, тип: ${boxName}`;
+    if (quantity) searchQuery += `, количество: ${quantity} шт`;
     
-    // Создаем скрытое поле для сводки заказа
-    let summaryField = document.getElementById('orderSummaryHidden');
-    if (!summaryField) {
-        summaryField = document.createElement('textarea');
-        summaryField.id = 'orderSummaryHidden';
-        summaryField.name = 'order_summary';
-        summaryField.style.display = 'none';
-        form.appendChild(summaryField);
+    // Обновляем скрытое поле q
+    const qField = form.querySelector('input[name="q"]');
+    if (qField) {
+        qField.value = searchQuery;
     }
-    summaryField.value = orderSummary;
     
-    // Formspree отправит форму автоматически
-    // Мы просто показываем уведомление через 1.5 секунды
+    // Показываем индикатор загрузки
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Перенаправление в Google...';
+    submitBtn.disabled = true;
+    
+    // Показываем сообщение об успехе
+    const orderId = 'ORD-' + Date.now();
+    showSuccessMessage(orderId);
+    
+    // Через 1.5 секунды разрешаем отправку формы
     setTimeout(() => {
-        showSuccessMessage(orderId);
+        // Форма отправится автоматически в Google
+        // Восстанавливаем кнопку
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
     }, 1500);
     
-   
-    return true;
+    // Предотвращаем мгновенную отправку
+    return false;
 }
-
 // Функция показа сообщения об успехе
 function showSuccessMessage(orderId) {
     // Создаем красивый alert
