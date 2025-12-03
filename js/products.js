@@ -16,7 +16,7 @@ const productsData = [
         description: "Идеальна для упаковки небольших товаров, канцелярии, косметики.",
         price: "от 12 руб./шт",
         category: "small",
-        image: "images/small-box.jpg"
+        image: "image/small-box.jpg"
     },
     {
         id: 2,
@@ -24,7 +24,7 @@ const productsData = [
         description: "Подходит для упаковки книг, обуви, бытовой техники.",
         price: "от 18 руб./шт",
         category: "medium",
-        image: "images/box.avif"
+        image: "image/middle-box.webp"
     },
     {
         id: 3,
@@ -32,7 +32,7 @@ const productsData = [
         description: "Для крупногабаритных товаров, переездов, хранения вещей.",
         price: "от 25 руб./шт",
         category: "large",
-        image: "images/large-box.jpg"
+        image: "image/large-box.jpg"
     },
     {
         id: 4,
@@ -40,7 +40,7 @@ const productsData = [
         description: "Элегантная упаковка для подарков с дизайнерской печатью.",
         price: "от 35 руб./шт",
         category: "special",
-        image: "images/gift-box.jpg"
+        image: "image/gift-box.jpg"
     },
     {
         id: 5,
@@ -48,7 +48,7 @@ const productsData = [
         description: "Специальная коробка для доставки пиццы и другой еды.",
         price: "от 8 руб./шт",
         category: "special",
-        image: "images/pizza-box.png"
+        image: "image/pizza-box.png"
     },
     {
         id: 6,
@@ -56,7 +56,7 @@ const productsData = [
         description: "Прочная коробка для переездов с усиленными стенками.",
         price: "от 30 руб./шт",
         category: "large",
-        image: "images/move-box.webp"
+        image: "image/move-box.webp"
     },
     {
         id: 7,
@@ -64,7 +64,7 @@ const productsData = [
         description: "Защитная упаковка для телефонов, планшетов и другой техники.",
         price: "от 15 руб./шт",
         category: "small",
-        image: "images/electronic-box.jpg"
+        image: "image/electronic-box.jpg"
     },
     {
         id: 8,
@@ -80,7 +80,7 @@ const productsData = [
         description: "Специальная упаковка для бутылок вина и других напитков.",
         price: "от 22 руб./шт",
         category: "special",
-        image: "images/vine-box.jpg"
+        image: "image/vine-box.jpg"
     },
     {
         id: 10,
@@ -88,7 +88,7 @@ const productsData = [
         description: "Архивная коробка для хранения документов и бумаг.",
         price: "от 28 руб./шт",
         category: "medium",
-        image: "images/office-box.webp"
+        image: "image/office-box.webp"
     },
     {
         id: 11,
@@ -96,7 +96,7 @@ const productsData = [
         description: "Яркая коробка для детских игрушек с безопасными краями.",
         price: "от 16 руб./шт",
         category: "small",
-        image: "images/kids-box.jpg"
+        image: "image/kids-box.jpg"
     },
     {
         id: 12,
