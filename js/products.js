@@ -104,7 +104,7 @@ const productsData = [
         description: "Элегантная коробка для букетов и цветочных композиций.",
         price: "от 32 руб./шт",
         category: "special",
-        image: "images/flower-box.jpg"
+        image: "image/flower-box.jpg"
     }
 ];
 
