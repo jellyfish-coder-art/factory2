@@ -28,12 +28,18 @@ body {
 
 /* Герой-секция */
 .hero-section {
-    background: linear-gradient(rgba(44, 110, 73, 0.85), rgba(44, 110, 73, 0.9)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+    background: 
+        /* Зеленый overlay поверх фото */
+        linear-gradient(rgba(44, 110, 73, 0.85), rgba(44, 110, 73, 0.9)),
+        /* Ваше фото */
+        url('images/background.jpg');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     color: white;
     padding: 100px 0;
     margin-bottom: 50px;
+    position: relative;
 }
 
 /* Стили для кнопок в герое */
