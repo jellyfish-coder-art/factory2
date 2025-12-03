@@ -72,7 +72,7 @@ const productsData = [
         description: "Стильная упаковка для косметических средств и парфюмерии.",
         price: "от 20 руб./шт",
         category: "medium",
-        image: "images/cosmetics-box.jpg"
+        image: "image/cosmetics-box.jpg"
     },
     {
         id: 9,
